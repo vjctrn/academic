@@ -1,0 +1,416 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict fxuLbKqpayKxTWNZ79R8mUDZtKOM1918iBM2R4dO9V1Bt0v4wI78Rf0BJ8YgMjp
+
+-- Dumped from database version 18.6
+-- Dumped by pg_dump version 18.6
+
+-- Started on 2026-09-30 21:00:22 PST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 226 (class 1259 OID 16595)
+-- Name: borrow_items; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.borrow_items (
+    borrow_item_id integer NOT NULL,
+    borrow_id integer NOT NULL,
+    equipment_id integer NOT NULL,
+    quantity integer NOT NULL,
+    CONSTRAINT borrow_items_quantity_check CHECK ((quantity > 0))
+);
+
+
+ALTER TABLE public.borrow_items OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16594)
+-- Name: borrow_items_borrow_item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.borrow_items_borrow_item_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.borrow_items_borrow_item_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3534 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: borrow_items_borrow_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.borrow_items_borrow_item_id_seq OWNED BY public.borrow_items.borrow_item_id;
+
+
+--
+-- TOC entry 224 (class 1259 OID 16574)
+-- Name: borrow_transactions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.borrow_transactions (
+    borrow_id integer NOT NULL,
+    borrower_id integer NOT NULL,
+    borrow_date date DEFAULT CURRENT_DATE NOT NULL,
+    due_date date NOT NULL,
+    status character varying(20) DEFAULT 'Borrowed'::character varying NOT NULL,
+    CONSTRAINT borrow_transactions_check CHECK ((due_date >= borrow_date)),
+    CONSTRAINT borrow_transactions_status_check CHECK (((status)::text = ANY ((ARRAY['Borrowed'::character varying, 'Returned'::character varying, 'Overdue'::character varying, 'Cancelled'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.borrow_transactions OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16573)
+-- Name: borrow_transactions_borrow_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.borrow_transactions_borrow_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.borrow_transactions_borrow_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3535 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: borrow_transactions_borrow_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.borrow_transactions_borrow_id_seq OWNED BY public.borrow_transactions.borrow_id;
+
+
+--
+-- TOC entry 220 (class 1259 OID 16545)
+-- Name: borrowers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.borrowers (
+    borrower_id integer NOT NULL,
+    borrower_no character varying(20) NOT NULL,
+    full_name character varying(100) NOT NULL,
+    borrower_type character varying(20) NOT NULL,
+    CONSTRAINT borrowers_borrower_type_check CHECK (((borrower_type)::text = ANY ((ARRAY['Student'::character varying, 'Staff'::character varying, 'Faculty'::character varying])::text[])))
+);
+
+
+ALTER TABLE public.borrowers OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16544)
+-- Name: borrowers_borrower_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.borrowers_borrower_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.borrowers_borrower_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3536 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: borrowers_borrower_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.borrowers_borrower_id_seq OWNED BY public.borrowers.borrower_id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 16559)
+-- Name: equipment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.equipment (
+    equipment_id integer NOT NULL,
+    property_no character varying(20) NOT NULL,
+    equipment_name character varying(100) NOT NULL,
+    quantity_available integer DEFAULT 0 NOT NULL,
+    CONSTRAINT equipment_quantity_available_check CHECK ((quantity_available >= 0))
+);
+
+
+ALTER TABLE public.equipment OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16558)
+-- Name: equipment_equipment_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.equipment_equipment_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.equipment_equipment_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3537 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: equipment_equipment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.equipment_equipment_id_seq OWNED BY public.equipment.equipment_id;
+
+
+--
+-- TOC entry 3351 (class 2604 OID 16598)
+-- Name: borrow_items borrow_item_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_items ALTER COLUMN borrow_item_id SET DEFAULT nextval('public.borrow_items_borrow_item_id_seq'::regclass);
+
+
+--
+-- TOC entry 3348 (class 2604 OID 16577)
+-- Name: borrow_transactions borrow_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_transactions ALTER COLUMN borrow_id SET DEFAULT nextval('public.borrow_transactions_borrow_id_seq'::regclass);
+
+
+--
+-- TOC entry 3345 (class 2604 OID 16548)
+-- Name: borrowers borrower_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrowers ALTER COLUMN borrower_id SET DEFAULT nextval('public.borrowers_borrower_id_seq'::regclass);
+
+
+--
+-- TOC entry 3346 (class 2604 OID 16562)
+-- Name: equipment equipment_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipment ALTER COLUMN equipment_id SET DEFAULT nextval('public.equipment_equipment_id_seq'::regclass);
+
+
+--
+-- TOC entry 3528 (class 0 OID 16595)
+-- Dependencies: 226
+-- Data for Name: borrow_items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.borrow_items VALUES (1, 1, 2, 1);
+INSERT INTO public.borrow_items VALUES (2, 2, 1, 1);
+INSERT INTO public.borrow_items VALUES (3, 2, 8, 1);
+INSERT INTO public.borrow_items VALUES (4, 2, 6, 1);
+INSERT INTO public.borrow_items VALUES (5, 3, 3, 2);
+INSERT INTO public.borrow_items VALUES (6, 3, 7, 2);
+INSERT INTO public.borrow_items VALUES (7, 4, 8, 1);
+INSERT INTO public.borrow_items VALUES (8, 4, 5, 1);
+
+
+--
+-- TOC entry 3526 (class 0 OID 16574)
+-- Dependencies: 224
+-- Data for Name: borrow_transactions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.borrow_transactions VALUES (1, 1, '2026-08-17', '2026-08-30', 'Overdue');
+INSERT INTO public.borrow_transactions VALUES (2, 2, '2026-08-30', '2026-09-15', 'Returned');
+INSERT INTO public.borrow_transactions VALUES (3, 3, '2026-09-11', '2026-09-28', 'Cancelled');
+INSERT INTO public.borrow_transactions VALUES (4, 4, '2026-09-26', '2026-10-14', 'Borrowed');
+
+
+--
+-- TOC entry 3522 (class 0 OID 16545)
+-- Dependencies: 220
+-- Data for Name: borrowers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.borrowers VALUES (1, 'STU-2026-001', 'VJ Cutaran', 'Student');
+INSERT INTO public.borrowers VALUES (2, 'STU-2026-002', 'Glen Gabriel Gonzaga', 'Student');
+INSERT INTO public.borrowers VALUES (3, 'STU-2026-003', 'Glen Sidney Caidic', 'Student');
+INSERT INTO public.borrowers VALUES (4, 'FAC-2026-101', 'Prof. Aris Dela Rea', 'Faculty');
+INSERT INTO public.borrowers VALUES (5, 'STA-2026-201', 'Sir Donato', 'Staff');
+
+
+--
+-- TOC entry 3524 (class 0 OID 16559)
+-- Dependencies: 222
+-- Data for Name: equipment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.equipment VALUES (1, 'PROP-PRJ-01', 'Epson PowerLite E24 3LCD Classroom Projector', 3);
+INSERT INTO public.equipment VALUES (3, 'PROP-LAP-06', 'Lenovo ThinkPad X1 Carbon Gen 14 Aura Edition', 4);
+INSERT INTO public.equipment VALUES (4, 'PROP-LAP-07', 'Framework Laptop 12', 3);
+INSERT INTO public.equipment VALUES (5, 'PROP-DOC-01', 'UGREEN USB C Hub 5 in 1 Multiport USB Adapter 4K HDMI, 100W Power Delivery', 7);
+INSERT INTO public.equipment VALUES (6, 'PROP-CAB-09', 'UGREEN 8K HDMI 2.1 Cable 48Gbps 6.6FT, Certified Ultra High Speed HDMI Cord', 10);
+INSERT INTO public.equipment VALUES (7, 'PROP-MSE-02', 'Logitech Signature M650', 7);
+INSERT INTO public.equipment VALUES (8, 'PROP-MIC-03', 'Wired Lapel Microphone Set', 15);
+INSERT INTO public.equipment VALUES (2, 'PROP-CAL-04', 'Casio fx-991ES PLUS 2nd edition Scientific Calculator', 8);
+
+
+--
+-- TOC entry 3538 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: borrow_items_borrow_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.borrow_items_borrow_item_id_seq', 9, true);
+
+
+--
+-- TOC entry 3539 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: borrow_transactions_borrow_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.borrow_transactions_borrow_id_seq', 4, true);
+
+
+--
+-- TOC entry 3540 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: borrowers_borrower_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.borrowers_borrower_id_seq', 5, true);
+
+
+--
+-- TOC entry 3541 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: equipment_equipment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.equipment_equipment_id_seq', 10, true);
+
+
+--
+-- TOC entry 3368 (class 2606 OID 16607)
+-- Name: borrow_items borrow_items_borrow_id_equipment_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_items
+    ADD CONSTRAINT borrow_items_borrow_id_equipment_id_key UNIQUE (borrow_id, equipment_id);
+
+
+--
+-- TOC entry 3370 (class 2606 OID 16605)
+-- Name: borrow_items borrow_items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_items
+    ADD CONSTRAINT borrow_items_pkey PRIMARY KEY (borrow_item_id);
+
+
+--
+-- TOC entry 3366 (class 2606 OID 16588)
+-- Name: borrow_transactions borrow_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_transactions
+    ADD CONSTRAINT borrow_transactions_pkey PRIMARY KEY (borrow_id);
+
+
+--
+-- TOC entry 3358 (class 2606 OID 16557)
+-- Name: borrowers borrowers_borrower_no_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrowers
+    ADD CONSTRAINT borrowers_borrower_no_key UNIQUE (borrower_no);
+
+
+--
+-- TOC entry 3360 (class 2606 OID 16555)
+-- Name: borrowers borrowers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrowers
+    ADD CONSTRAINT borrowers_pkey PRIMARY KEY (borrower_id);
+
+
+--
+-- TOC entry 3362 (class 2606 OID 16570)
+-- Name: equipment equipment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipment
+    ADD CONSTRAINT equipment_pkey PRIMARY KEY (equipment_id);
+
+
+--
+-- TOC entry 3364 (class 2606 OID 16572)
+-- Name: equipment equipment_property_no_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipment
+    ADD CONSTRAINT equipment_property_no_key UNIQUE (property_no);
+
+
+--
+-- TOC entry 3372 (class 2606 OID 16608)
+-- Name: borrow_items borrow_items_borrow_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_items
+    ADD CONSTRAINT borrow_items_borrow_id_fkey FOREIGN KEY (borrow_id) REFERENCES public.borrow_transactions(borrow_id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3373 (class 2606 OID 16613)
+-- Name: borrow_items borrow_items_equipment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_items
+    ADD CONSTRAINT borrow_items_equipment_id_fkey FOREIGN KEY (equipment_id) REFERENCES public.equipment(equipment_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3371 (class 2606 OID 16589)
+-- Name: borrow_transactions borrow_transactions_borrower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.borrow_transactions
+    ADD CONSTRAINT borrow_transactions_borrower_id_fkey FOREIGN KEY (borrower_id) REFERENCES public.borrowers(borrower_id) ON DELETE RESTRICT;
+
+
+-- Completed on 2026-09-30 21:00:22 PST
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict fxuLbKqpayKxTWNZ79R8mUDZtKOM1918iBM2R4dO9V1Bt0v4wI78Rf0BJ8YgMjp
+

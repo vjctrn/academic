@@ -1,0 +1,154 @@
+:root {
+  --grass: #5b9f3b;
+  --grass-dark: #356e2a;
+  --dirt: #8b572a;
+  --stone: #2d3740;
+  --stone-light: #aeb8b5;
+  --sky: #bfe8ff;
+  --ink: #17211d;
+  --paper: #f6f1df;
+  --shadow: 0 8px 0 rgba(23, 33, 29, 0.18);
+}
+
+/* This sets the page background, text color, and default font. */
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background:
+    linear-gradient(rgba(191, 232, 255, 0.35), rgba(191, 232, 255, 0.35)),
+    url("../assets/background.png") center / cover fixed,
+    var(--sky);
+}
+
+/* This follows the dark sticky navbar style I used in my portfolio. */
+.site-header {
+  background: var(--stone);
+  border-bottom: 3px solid var(--ink);
+}
+
+/* The brand is styled like the name of a small game or Minecraft world. */
+.site-brand {
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.site-brand:hover,
+.site-header .nav-link:hover {
+  color: #f6c453;
+}
+
+/* This adds a little space to the links while keeping the header simple. */
+.site-header .nav-link {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* This keeps the layout centered and adds space around the cards. */
+.bento-shell {
+  max-width: 1180px;
+  padding: 2rem 1rem 3rem;
+}
+
+/* These are the basic styles shared by all of the bento cards. */
+.bento-card {
+  height: 100%;
+  padding: 1.5rem;
+  border: 4px solid var(--ink);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+/* This styles the main intro card at the top of the page. */
+.hero-card {
+  min-height: 310px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background:
+    linear-gradient(transparent 35%, rgba(0, 0, 0, 0.8)),
+    url("../assets/minecraft%20hero.png") center / cover,
+    var(--grass);
+}
+
+/* Different colors make the profile, feature, quote, and CTA cards easier to tell apart. */
+.profile-card { background: #f6c453; }
+.feature-card { background: var(--grass); color: #fff; }
+.quote-card { background: #d9c4a7; }
+.cta-card { background: var(--dirt); color: #fff; }
+
+/* These styles control the small labels and headings on the cards. */
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--grass-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-card .eyebrow,
+.feature-card .eyebrow,
+.cta-card .eyebrow {
+  color: inherit;
+}
+
+.pixel-title {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* This makes a simple circular space for the avatar image or label. */
+.avatar-placeholder {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 1rem;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--stone);
+}
+
+/* This is the shared style for the buttons used on the cards. */
+.block-button {
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  background: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.block-button:hover {
+  color: #fff;
+  background: var(--grass-dark);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* These changes make the cards fit better on phones and smaller screens. */
+@media (max-width: 767px) {
+  .bento-shell {
+    padding-top: 1rem;
+  }
+
+  .bento-card {
+    padding: 1.25rem;
+  }
+}
+
+/* This is the dark centered footer, similar to the one on my portfolio. */
+.site-footer {
+  padding: 1.25rem 1rem;
+  color: #fff;
+  background: var(--stone);
+  border-top: 3px solid var(--ink);
+}
