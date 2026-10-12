@@ -1,90 +1,146 @@
 :root {
-  --grass: #5b9f3b;
-  --grass-dark: #356e2a;
-  --dirt: #8b572a;
-  --stone: #2d3740;
-  --stone-light: #aeb8b5;
-  --sky: #bfe8ff;
-  --ink: #17211d;
-  --paper: #f6f1df;
-  --shadow: 0 8px 0 rgba(23, 33, 29, 0.18);
+  --mc-grass: #5b9f3b;
+  --mc-grass-dark: #356e2a;
+  --mc-dirt: #8b572a;
+  --mc-stone: #2d3740;
+  --mc-paper: #f6f1df;
+  --mc-gold: #f6c453;
+  --mc-sand: #d9c4a7;
+  --mc-sky: 191, 232, 255;
+  --mc-ink: #17211d;
+  --mc-header: #2d3740;
+  --mc-header-text: #f6f1df;
+  --page-overlay: rgba(var(--mc-sky), 0.35);
+  --card-shadow: 0 8px 0 rgba(23, 33, 29, 0.35);
 }
 
-/* This sets the page background, text color, and default font. */
 body {
   min-height: 100vh;
-  color: var(--ink);
+  color: var(--mc-ink);
   font-family: "Trebuchet MS", Arial, sans-serif;
   background:
-    linear-gradient(rgba(191, 232, 255, 0.35), rgba(191, 232, 255, 0.35)),
-    url("../assets/background.png") center / cover fixed,
-    var(--sky);
+    linear-gradient(var(--page-overlay), var(--page-overlay)),
+    url("../assets/background-light.jpg") center / cover fixed,
+    var(--mc-paper);
+  transition: color 0.3s, background-color 0.3s;
 }
 
-/* This follows the dark sticky navbar style I used in my portfolio. */
+[data-bs-theme="dark"] {
+  --mc-grass: #6fbf44;
+  --mc-grass-dark: #b6e3a0;
+  --mc-dirt: #a96d38;
+  --mc-stone: #17211d;
+  --mc-paper: #26332f;
+  --mc-gold: #f6c453;
+  --mc-sand: #4a392b;
+  --mc-ink: #f6f1df;
+  --page-overlay: rgba(23, 33, 29, 0.55);
+}
+
+[data-bs-theme="dark"] body {
+  background:
+    linear-gradient(var(--page-overlay), var(--page-overlay)),
+    url("../assets/background-dark.jpg") center / cover fixed,
+    var(--mc-paper);
+}
+
+.site-header,
+.site-footer {
+  color: var(--mc-header-text);
+  background: var(--mc-header);
+  border-color: var(--mc-header-text);
+}
+
 .site-header {
-  background: var(--stone);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 3px solid;
 }
 
-/* The brand is styled like the name of a small game or Minecraft world. */
+.site-brand,
+.site-header .nav-link {
+  color: var(--mc-header-text);
+}
+
 .site-brand {
-  color: #fff;
   font-weight: 900;
   letter-spacing: 0.08em;
 }
 
 .site-brand:hover,
 .site-header .nav-link:hover {
-  color: #f6c453;
+  color: var(--mc-gold);
 }
 
-/* This adds a little space to the links while keeping the header simple. */
-.site-header .nav-link {
-  color: #fff;
+.theme-toggle {
+  padding: 0.35rem 0.6rem;
+  border: 2px solid var(--mc-header-text);
+  color: var(--mc-header-text);
+  background: transparent;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
-/* This keeps the layout centered and adds space around the cards. */
+.theme-toggle:hover {
+  color: var(--mc-header);
+  background: var(--mc-header-text);
+}
+
 .bento-shell {
   max-width: 1180px;
   padding: 2rem 1rem 3rem;
 }
 
-/* These are the basic styles shared by all of the bento cards. */
 .bento-card {
   height: 100%;
   padding: 1.5rem;
-  border: 4px solid var(--ink);
+  color: var(--mc-ink);
+  border: 4px solid var(--mc-ink);
   border-radius: 0.5rem;
-  box-shadow: var(--shadow);
-  background: var(--paper);
+  box-shadow: var(--card-shadow);
+  background: var(--mc-paper);
   overflow: hidden;
 }
 
-/* This styles the main intro card at the top of the page. */
 .hero-card {
   min-height: 310px;
-  color: #fff;
+  color: var(--bs-white);
   display: flex;
   flex-direction: column;
   justify-content: end;
   background:
-    linear-gradient(transparent 35%, rgba(0, 0, 0, 0.8)),
+    linear-gradient(transparent 35%, rgba(var(--bs-black-rgb), 0.8)),
     url("../assets/minecraft%20hero.png") center / cover,
-    var(--grass);
+    var(--mc-grass);
 }
 
-/* Different colors make the profile, feature, quote, and CTA cards easier to tell apart. */
-.profile-card { background: #f6c453; }
-.feature-card { background: var(--grass); color: #fff; }
-.quote-card { background: #d9c4a7; }
-.cta-card { background: var(--dirt); color: #fff; }
+.profile-card {
+  background: var(--mc-gold);
+}
 
-/* These styles control the small labels and headings on the cards. */
+.feature-card {
+  color: var(--bs-white);
+  background: var(--mc-grass);
+}
+
+.quote-card {
+  background: var(--mc-sand);
+}
+
+.cta-card {
+  color: var(--bs-white);
+  background: var(--mc-dirt);
+}
+
+[data-bs-theme="dark"] .profile-card {
+  color: var(--mc-ink);
+}
+
+[data-bs-theme="dark"] .quote-card {
+  color: var(--mc-ink);
+}
+
 .eyebrow {
   margin-bottom: 0.5rem;
-  color: var(--grass-dark);
+  color: var(--mc-grass-dark);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -104,37 +160,39 @@ body {
   text-transform: uppercase;
 }
 
-/* This makes a simple circular space for the avatar image or label. */
 .avatar-placeholder {
   width: 76px;
   height: 76px;
   margin-bottom: 1rem;
-  border: 4px solid var(--ink);
+  border: 4px solid var(--mc-ink);
   border-radius: 50%;
   object-fit: cover;
-  background: var(--stone);
+  background: var(--mc-stone);
 }
 
-/* This is the shared style for the buttons used on the cards. */
 .block-button {
   display: inline-block;
   padding: 0.7rem 1rem;
-  border: 3px solid var(--ink);
-  color: var(--ink);
-  background: #fff;
+  color: var(--mc-ink);
+  background: var(--mc-paper);
+  border: 3px solid var(--mc-ink);
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--mc-ink);
 }
 
 .block-button:hover {
-  color: #fff;
-  background: var(--grass-dark);
+  color: var(--bs-white);
+  background: var(--mc-grass-dark);
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--mc-ink);
 }
 
-/* These changes make the cards fit better on phones and smaller screens. */
+.site-footer {
+  padding: 1.25rem 1rem;
+  border-top: 3px solid;
+}
+
 @media (max-width: 767px) {
   .bento-shell {
     padding-top: 1rem;
@@ -143,12 +201,4 @@ body {
   .bento-card {
     padding: 1.25rem;
   }
-}
-
-/* This is the dark centered footer, similar to the one on my portfolio. */
-.site-footer {
-  padding: 1.25rem 1rem;
-  color: #fff;
-  background: var(--stone);
-  border-top: 3px solid var(--ink);
 }
