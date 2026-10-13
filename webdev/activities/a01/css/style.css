@@ -86,12 +86,10 @@ body {
 
 .bento-shell {
   max-width: 1180px;
-  padding: 2rem 1rem 3rem;
 }
 
 .bento-card {
   height: 100%;
-  padding: 1.5rem;
   color: var(--mc-ink);
   border: 4px solid var(--mc-ink);
   border-radius: 0.5rem;
@@ -108,7 +106,7 @@ body {
   justify-content: end;
   background:
     linear-gradient(transparent 35%, rgba(var(--bs-black-rgb), 0.8)),
-    url("../assets/minecraft%20hero.png") center / cover,
+    url("../assets/minecraft-hero.png") center / cover,
     var(--mc-grass);
 }
 
@@ -191,14 +189,4 @@ body {
 .site-footer {
   padding: 1.25rem 1rem;
   border-top: 3px solid;
-}
-
-@media (max-width: 767px) {
-  .bento-shell {
-    padding-top: 1rem;
-  }
-
-  .bento-card {
-    padding: 1.25rem;
-  }
 }
