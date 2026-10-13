@@ -68,9 +68,10 @@ body {
   letter-spacing: 0.08em;
 }
 
-.site-logo {
-  width: 32px;
-  height: 32px;
+.site-brand .site-logo {
+  display: inline-block;
+  width: 32px !important;
+  height: 32px !important;
   object-fit: contain;
   vertical-align: middle;
 }
@@ -160,6 +161,14 @@ body {
 .feature-card .eyebrow,
 .cta-card .eyebrow {
   color: inherit;
+}
+
+.hero-welcome {
+  text-shadow:
+    1px 0 #000,
+    -1px 0 #000,
+    0 1px #000,
+    0 -1px #000;
 }
 
 .pixel-title {
