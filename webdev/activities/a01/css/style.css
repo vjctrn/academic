@@ -22,7 +22,9 @@ body {
     linear-gradient(var(--page-overlay), var(--page-overlay)),
     url("../assets/background-light.jpg") center / cover fixed,
     var(--mc-paper);
-  transition: color 0.3s, background-color 0.3s;
+  transition:
+    color 0.3s,
+    background-color 0.3s;
 }
 
 [data-bs-theme="dark"] {
@@ -61,8 +63,16 @@ body {
 }
 
 .site-brand {
+  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
   font-weight: 900;
   letter-spacing: 0.08em;
+}
+
+.site-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .site-brand:hover,
@@ -139,6 +149,7 @@ body {
 .eyebrow {
   margin-bottom: 0.5rem;
   color: var(--mc-grass-dark);
+  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -153,6 +164,7 @@ body {
 
 .pixel-title {
   margin: 0;
+  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
   font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;

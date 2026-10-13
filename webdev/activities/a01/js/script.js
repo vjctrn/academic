@@ -11,9 +11,8 @@ function setTheme(theme) {
 }
 
 toggle.addEventListener("click", () => {
-  const nextTheme = root.getAttribute("data-bs-theme") === "dark"
-    ? "light"
-    : "dark";
+  const nextTheme =
+    root.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
   setTheme(nextTheme);
 });
 
