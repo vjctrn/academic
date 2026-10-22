@@ -1,5 +1,7 @@
 const root = document.documentElement;
 const toggle = document.querySelector("#theme-toggle");
+const navToggle = document.querySelector("#nav-toggle");
+const mainNavigation = document.querySelector("#main-navigation");
 const savedTheme = localStorage.getItem("blockbound-theme") || "light";
 
 function setTheme(theme) {
@@ -17,3 +19,20 @@ toggle.addEventListener("click", () => {
 });
 
 setTheme(savedTheme);
+
+navToggle.addEventListener("click", () => {
+  const isOpen = mainNavigation.classList.toggle("show");
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation menu" : "Open navigation menu",
+  );
+});
+
+mainNavigation.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mainNavigation.classList.remove("show");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open navigation menu");
+  });
+});

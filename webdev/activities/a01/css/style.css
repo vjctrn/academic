@@ -81,6 +81,18 @@ body {
   color: var(--mc-gold);
 }
 
+.navbar-toggler {
+  border: 2px solid var(--mc-header-text);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(246, 196, 83, 0.5);
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+
 .theme-toggle {
   padding: 0.35rem 0.6rem;
   border: 2px solid var(--mc-header-text);
@@ -93,6 +105,24 @@ body {
 .theme-toggle:hover {
   color: var(--mc-header);
   background: var(--mc-header-text);
+}
+
+@media (max-width: 767.98px) {
+  .site-header .navbar-collapse {
+    flex-basis: 100%;
+    padding-top: 0.75rem;
+  }
+
+  .site-header .navbar-nav {
+    align-items: stretch;
+  }
+
+  .site-header .nav-link,
+  .theme-toggle {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
 }
 
 .bento-shell {

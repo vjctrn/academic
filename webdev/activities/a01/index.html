@@ -22,10 +22,13 @@
 
   <body id="top">
     <!-- Header: Based this on the dark sticky navbar from my portfolio. -->
-    <header class="navbar navbar-expand navbar-dark site-header sticky-top">
+    <header class="navbar navbar-expand-md navbar-dark site-header sticky-top">
       <div class="container">
         <!-- This is the website name shown on the left side of the header. -->
-        <a class="navbar-brand site-brand d-inline-flex align-items-center" href="#top">
+        <a
+          class="navbar-brand site-brand d-inline-flex align-items-center"
+          href="#top"
+        >
           <img
             class="site-logo me-2"
             src="assets/favicon.png"
@@ -35,9 +38,26 @@
           BLOCKBOUND
         </a>
 
+        <button
+          class="navbar-toggler d-md-none"
+          id="nav-toggle"
+          type="button"
+          aria-controls="main-navigation"
+          aria-expanded="false"
+          aria-label="Open navigation menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
         <!-- These links jump to the main sections of the page. -->
-        <nav aria-label="Main navigation">
-          <ul class="navbar-nav flex-row align-items-center gap-2">
+        <nav
+          class="collapse navbar-collapse"
+          id="main-navigation"
+          aria-label="Main navigation"
+        >
+          <ul
+            class="navbar-nav flex-column flex-md-row align-items-md-center gap-2"
+          >
             <li class="nav-item">
               <a class="nav-link" href="#top">Home</a>
             </li>
