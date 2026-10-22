@@ -107,24 +107,6 @@ body {
   background: var(--mc-header-text);
 }
 
-@media (max-width: 767.98px) {
-  .site-header .navbar-collapse {
-    flex-basis: 100%;
-    padding-top: 0.75rem;
-  }
-
-  .site-header .navbar-nav {
-    align-items: stretch;
-  }
-
-  .site-header .nav-link,
-  .theme-toggle {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
-}
-
 .bento-shell {
   max-width: 1180px;
 }
