@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Document metadata and the local favicon. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -11,6 +12,7 @@
     <link rel="icon" href="assets/favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Bootstrap provides the layout, responsive utilities, and icons used below. -->
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -26,7 +28,9 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <!-- This overlay adds a subtle texture without affecting page content. -->
     <div class="page-noise"></div>
+    <!-- Solid Minecraft-inspired header for reliable text contrast. -->
     <nav class="navbar navbar-expand-lg py-3 bg-solid">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
@@ -48,6 +52,7 @@
     </nav>
 
     <main>
+      <!-- Intro area: server search, edition selector, and quick examples. -->
       <section class="hero-section container pt-5 pb-5">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
@@ -152,6 +157,7 @@
         </div>
       </section>
 
+      <!-- Live API readout. JavaScript fills these cards after a scan. -->
       <section class="container dashboard-section" aria-live="polite">
         <div
           class="status-heading d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-end gap-3 gap-sm-0 mb-3"
@@ -274,6 +280,7 @@
         </div>
       </section>
     </main>
+    <!-- Solid footer keeps the attribution readable over the page background. -->
     <footer class="bg-solid">
       <div
         class="container py-4 d-flex flex-wrap justify-content-between gap-2"

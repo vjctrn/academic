@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
+/* Shared palette. Theme-specific values are overridden in body.dark-mode. */
 :root {
   --ink: #ffffff;
   --surface-ink: #17191c;
@@ -37,6 +38,7 @@ body.dark-mode {
   --line: #343a35;
   background-image: url("../assets/background-dark.jpg");
 }
+/* Decorative texture layer; it never captures clicks or affects layout. */
 .page-noise {
   background-image: url("../assets/background-dark.jpg");
   inset: 0;
@@ -45,6 +47,7 @@ body.dark-mode {
   position: fixed;
   z-index: -1;
 }
+/* Header and footer intentionally use opaque Minecraft-inspired colors. */
 .navbar {
   background-color: var(--minecraft-green);
   border-bottom: 4px solid var(--minecraft-sand);
@@ -83,6 +86,7 @@ footer {
   line-height: 1;
   width: 34px;
 }
+/* Hero/search presentation. Bootstrap handles the responsive layout classes. */
 .eyebrow,
 .card-label {
   color: var(--muted);
@@ -186,6 +190,7 @@ h1 {
 .art-label .pulse-dot {
   background: var(--lime);
 }
+/* Dashboard cards and their status-specific visual states. */
 .dashboard-section {
   padding-bottom: 54px;
 }
@@ -305,6 +310,7 @@ h2 {
   line-height: 1.6;
   min-height: 72px;
 }
+/* Player preview and fallback state. */
 .tiny-tag {
   border: 1px solid var(--line);
   color: var(--muted);
@@ -341,6 +347,7 @@ h2 {
 .empty-state i {
   font-size: 20px;
 }
+/* API failure message. */
 .alert {
   border-radius: 0;
   font: 11px var(--mono);

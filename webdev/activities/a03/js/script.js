@@ -1,3 +1,4 @@
+// Cache the controls that trigger scans or theme changes.
 const form = document.querySelector("#serverForm");
 const input = document.querySelector("#serverInput");
 const refreshButton = document.querySelector("#refreshButton");
@@ -6,6 +7,7 @@ const serverTypeInputs = document.querySelectorAll("input[name='serverType']");
 let activeServer = "";
 let activeServerType = "java";
 
+// Keep all API-driven DOM targets in one place.
 const elements = {
   title: document.querySelector("#serverTitle"),
   badge: document.querySelector("#statusBadge"),
@@ -26,6 +28,7 @@ const elements = {
 };
 
 function setLoading(isLoading) {
+  // Disable repeat submissions while the status service is responding.
   const button = form.querySelector("button");
   button.disabled = isLoading;
   button.innerHTML = isLoading
@@ -34,6 +37,7 @@ function setLoading(isLoading) {
 }
 
 function cleanMotd(lines) {
+  // The API can return multiple MOTD lines and Minecraft formatting codes.
   return (
     (lines || [])
       .join(" ")
@@ -43,6 +47,7 @@ function cleanMotd(lines) {
 }
 
 function renderPlayers(players = []) {
+  // Some servers do not expose a player list, so show the Bootstrap-friendly fallback.
   elements.playerList.innerHTML = players.length
     ? players
         .slice(0, 6)
@@ -58,6 +63,7 @@ function renderPlayers(players = []) {
 }
 
 function renderServer(server, address) {
+  // Map the shared Java/Bedrock response fields into the dashboard.
   const online = Boolean(server.online);
   const playersOnline = server.players?.online ?? 0;
   const maxPlayers = server.players?.max ?? 0;
@@ -93,6 +99,7 @@ function renderServer(server, address) {
 }
 
 async function fetchServer(address, type = activeServerType) {
+  // Java uses /3; Bedrock uses /bedrock/3 on the same API host.
   const normalizedAddress = address.trim();
   if (!normalizedAddress) return;
   activeServer = normalizedAddress;
@@ -120,19 +127,26 @@ async function fetchServer(address, type = activeServerType) {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  fetchServer(input.value, document.querySelector("input[name='serverType']:checked").value);
+  fetchServer(
+    input.value,
+    document.querySelector("input[name='serverType']:checked").value,
+  );
 });
 
+// Refresh the last request without losing its selected edition.
 refreshButton.addEventListener("click", () =>
   fetchServer(activeServer || input.value, activeServerType),
 );
+// Keep the input hint aligned with the selected server edition.
 serverTypeInputs.forEach((typeInput) => {
   typeInput.addEventListener("change", () => {
-    input.placeholder = typeInput.value === "bedrock"
-      ? "geo.hivebedrock.network"
-      : "play.example.net";
+    input.placeholder =
+      typeInput.value === "bedrock"
+        ? "geo.hivebedrock.network"
+        : "play.example.net";
   });
 });
+// Quick examples select their edition before starting a scan.
 document.querySelectorAll(".server-chip").forEach((chip) => {
   chip.addEventListener("click", () => {
     input.value = chip.dataset.server;
@@ -140,6 +154,7 @@ document.querySelectorAll(".server-chip").forEach((chip) => {
     fetchServer(input.value, chip.dataset.serverType);
   });
 });
+// The theme is a body class so the CSS variables update the whole page together.
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   themeToggle.innerHTML = document.body.classList.contains("dark-mode")
