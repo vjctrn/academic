@@ -1,3 +1,4 @@
+/* Core atlas palette; Bootstrap utilities provide most layout and spacing. */
 :root {
   --atlas-ink: #17211d;
   --atlas-paper: #f6f1df;
@@ -20,6 +21,7 @@ body {
 }
 
 [data-bs-theme="dark"] {
+  /* Bootstrap's theme attribute switches these custom variables as well. */
   --atlas-ink: #f6f1df;
   --atlas-paper: #26332f;
   --atlas-green: #70b64b;
@@ -37,6 +39,7 @@ body {
 
 .site-header,
 .site-footer {
+  /* Keep navigation and attribution on a solid Minecraft-inspired surface. */
   --bs-navbar-color: var(--atlas-header-text);
   --bs-navbar-hover-color: var(--atlas-gold);
   --bs-navbar-brand-color: var(--atlas-header-text);
@@ -72,6 +75,7 @@ body {
 
 .atlas-brand,
 .pixel-title {
+  /* Pixel font is reserved for titles and key labels. */
   font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
   letter-spacing: -0.04em;
 }
@@ -97,6 +101,7 @@ body {
 .about-panel,
 .mob-card,
 .biome-card {
+  /* Custom card treatment gives Bootstrap's grid a blocky atlas style. */
   border: 3px solid var(--atlas-ink);
   border-radius: 0.5rem;
   box-shadow: var(--atlas-shadow);
@@ -132,6 +137,7 @@ body {
 }
 
 .btn-atlas {
+  /* Main CTA uses a custom shadow while retaining Bootstrap button behavior. */
   color: #fff;
   background: var(--atlas-green);
   border-color: var(--atlas-ink);
@@ -164,6 +170,7 @@ body {
   transform: translateY(-4px);
 }
 
+/* Asset wrappers keep animated and static mob images at the same size. */
 .mob-icon {
   display: grid;
   width: 58px;
@@ -187,6 +194,7 @@ body {
 }
 
 .difficulty-bar {
+  /* Progress width is supplied inline from each mob's difficulty value. */
   height: 0.5rem;
   background: var(--atlas-green);
 }

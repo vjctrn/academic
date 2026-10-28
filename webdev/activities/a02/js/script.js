@@ -1,3 +1,4 @@
+// Local content data used to build the mob and biome directories.
 const mobs = [
   {
     name: "Allay",
@@ -62,6 +63,7 @@ const biomes = [
   },
 ];
 
+// Cache dynamic containers and Bootstrap's collapsible navigation controls.
 const mobList = document.querySelector("#mob-list");
 const biomeList = document.querySelector("#biome-list");
 const themeToggle = document.querySelector("#theme-toggle");
@@ -69,6 +71,7 @@ const navigation = document.querySelector("#main-navigation");
 const navigationToggle = document.querySelector(".navbar-toggler");
 
 function renderMobs() {
+  // Bootstrap grid classes make each generated mob card responsive.
   let mobMarkup = "";
 
   for (let i = 0; i < mobs.length; i += 1) {
@@ -104,6 +107,7 @@ function renderMobs() {
 }
 
 function renderBiomes() {
+  // Build biome cards from the local data without requiring another page.
   let biomeMarkup = "";
 
   for (let i = 0; i < biomes.length; i += 1) {
@@ -126,6 +130,7 @@ function renderBiomes() {
 }
 
 function renderStats() {
+  // Keep the summary counts tied to the source arrays automatically.
   const stats = [
     { value: mobs.length, label: "mobs" },
     { value: biomes.length, label: "biomes" },
@@ -148,6 +153,7 @@ function renderStats() {
 }
 
 themeToggle.addEventListener("click", () => {
+  // data-bs-theme updates Bootstrap and the custom dark-mode variables together.
   const nextTheme =
     document.documentElement.getAttribute("data-bs-theme") === "dark"
       ? "light"
@@ -157,6 +163,7 @@ themeToggle.addEventListener("click", () => {
 });
 
 navigation.addEventListener("shown.bs.collapse", () => {
+  // Keep the menu button's accessible label synchronized with its state.
   navigationToggle.setAttribute("aria-label", "Close navigation menu");
 });
 
@@ -168,10 +175,12 @@ const navigationLinks = navigation.querySelectorAll(".nav-link");
 for (let i = 0; i < navigationLinks.length; i += 1) {
   const link = navigationLinks[i];
   link.addEventListener("click", () => {
+    // Close the mobile menu after navigating to an in-page section.
     bootstrap.Collapse.getOrCreateInstance(navigation).hide();
   });
 }
 
+// Initial render: populate all generated sections once the script loads.
 renderMobs();
 renderBiomes();
 renderStats();

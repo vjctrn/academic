@@ -1,3 +1,4 @@
+// Cache the theme and mobile-navigation controls.
 const root = document.documentElement;
 const toggle = document.querySelector("#theme-toggle");
 const navToggle = document.querySelector("#nav-toggle");
@@ -5,6 +6,7 @@ const mainNavigation = document.querySelector("#main-navigation");
 const savedTheme = localStorage.getItem("blockbound-theme") || "light";
 
 function setTheme(theme) {
+  // Apply the Bootstrap theme attribute and persist the visitor's preference.
   const dark = theme === "dark";
   root.setAttribute("data-bs-theme", theme);
   toggle.textContent = dark ? "Light Mode" : "Dark Mode";
@@ -13,6 +15,7 @@ function setTheme(theme) {
 }
 
 toggle.addEventListener("click", () => {
+  // Switch between the two supported Bootstrap color modes.
   const nextTheme =
     root.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
   setTheme(nextTheme);
@@ -20,6 +23,7 @@ toggle.addEventListener("click", () => {
 
 setTheme(savedTheme);
 
+// The navigation uses Bootstrap classes while this handler updates accessibility state.
 navToggle.addEventListener("click", () => {
   const isOpen = mainNavigation.classList.toggle("show");
   navToggle.setAttribute("aria-expanded", String(isOpen));
@@ -31,6 +35,7 @@ navToggle.addEventListener("click", () => {
 
 mainNavigation.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
+    // Close the mobile menu after an in-page link is selected.
     mainNavigation.classList.remove("show");
     navToggle.setAttribute("aria-expanded", "false");
     navToggle.setAttribute("aria-label", "Open navigation menu");

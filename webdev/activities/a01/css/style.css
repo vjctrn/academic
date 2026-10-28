@@ -1,3 +1,4 @@
+/* Minecraft-inspired design tokens used throughout the bento layout. */
 :root {
   --mc-grass: #5b9f3b;
   --mc-grass-dark: #356e2a;
@@ -15,6 +16,7 @@
 }
 
 body {
+  /* The background image supplies texture while the overlay controls contrast. */
   min-height: 100vh;
   color: var(--mc-ink);
   font-family: "Trebuchet MS", Arial, sans-serif;
@@ -28,6 +30,7 @@ body {
 }
 
 [data-bs-theme="dark"] {
+  /* Bootstrap's theme attribute updates the custom palette for dark mode. */
   --mc-grass: #6fbf44;
   --mc-grass-dark: #b6e3a0;
   --mc-dirt: #a96d38;
@@ -48,6 +51,7 @@ body {
 
 .site-header,
 .site-footer {
+  /* Solid surfaces keep header and footer text readable over the texture. */
   color: var(--mc-header-text);
   background: var(--mc-header);
   border-color: var(--mc-header-text);
@@ -59,6 +63,7 @@ body {
 
 .site-brand,
 .site-header .nav-link {
+  /* Keep navigation text aligned with the custom header palette. */
   color: var(--mc-header-text);
 }
 
@@ -94,6 +99,7 @@ body {
 }
 
 .theme-toggle {
+  /* Custom button treatment complements the Bootstrap navbar utilities. */
   padding: 0.35rem 0.6rem;
   border: 2px solid var(--mc-header-text);
   color: var(--mc-header-text);
@@ -108,10 +114,12 @@ body {
 }
 
 .bento-shell {
+  /* Limit the reading width while Bootstrap handles the column layout. */
   max-width: 1180px;
 }
 
 .bento-card {
+  /* Shared block styling for hero, profile, content, and CTA cards. */
   height: 100%;
   color: var(--mc-ink);
   border: 4px solid var(--mc-ink);
@@ -122,6 +130,7 @@ body {
 }
 
 .hero-card {
+  /* Hero uses the uploaded landscape asset with a readability gradient. */
   min-height: 310px;
   color: var(--bs-white);
   display: flex;
@@ -159,6 +168,7 @@ body {
   color: var(--mc-ink);
 }
 
+/* Section labels use the pixel font and the current theme's green accent. */
 .eyebrow {
   margin-bottom: 0.5rem;
   color: var(--mc-grass-dark);
@@ -176,6 +186,7 @@ body {
 }
 
 .hero-welcome {
+  /* Outline the text so it remains visible over the hero image. */
   text-shadow:
     1px 0 #000,
     -1px 0 #000,
@@ -192,6 +203,7 @@ body {
 }
 
 .avatar-placeholder {
+  /* Consistent frame for the supplied avatar asset. */
   width: 76px;
   height: 76px;
   margin-bottom: 1rem;
@@ -202,6 +214,7 @@ body {
 }
 
 .block-button {
+  /* Block-style links are intentionally custom; layout remains Bootstrap-based. */
   display: inline-block;
   padding: 0.7rem 1rem;
   color: var(--mc-ink);
@@ -220,6 +233,7 @@ body {
 }
 
 .site-footer {
+  /* Match the header border treatment at the bottom of the page. */
   padding: 1.25rem 1rem;
   border-top: 3px solid;
 }
