@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Page metadata, fonts, Bootstrap, and the atlas favicon. -->
+    <!-- Page metadata and shared Bootstrap/font dependencies. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body id="top">
-    <!-- Bootstrap navbar collapses into a mobile menu at the medium breakpoint. -->
+    <!-- Bootstrap provides the responsive navigation collapse. -->
     <header class="navbar navbar-expand-md navbar-dark sticky-top site-header">
       <div class="container">
         <a
@@ -69,6 +69,7 @@
                 class="btn btn-sm theme-toggle"
                 id="theme-toggle"
                 type="button"
+                aria-pressed="false"
               >
                 Dark mode
               </button>
@@ -79,7 +80,7 @@
     </header>
 
     <main>
-      <!-- Intro panel and the main call to action. -->
+      <!-- Intro copy and expedition call to action. -->
       <section class="container py-5">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
@@ -104,7 +105,7 @@
         </div>
       </section>
 
-      <!-- Mob cards are generated from the mobs array in script.js. -->
+      <!-- JavaScript fills this grid from the local mob data. -->
       <section class="container pb-5" id="mobs">
         <div
           class="d-flex flex-wrap gap-3 justify-content-between align-items-end mb-4"
@@ -117,7 +118,7 @@
         <div class="row g-4" id="mob-list"></div>
       </section>
 
-      <!-- Biome cards are generated from the biomes array in script.js. -->
+      <!-- JavaScript fills this grid from the local biome data. -->
       <section class="container pb-5" id="biomes">
         <div class="mb-4">
           <p class="eyebrow mb-2">World map</p>
@@ -126,7 +127,7 @@
         <div class="row g-4" id="biome-list"></div>
       </section>
 
-      <!-- Explains the local-data approach and displays generated totals. -->
+      <!-- About panel also receives its totals from JavaScript. -->
       <section class="container pb-5" id="about">
         <div class="about-panel p-4 p-md-5">
           <div class="row g-4 align-items-center">
@@ -147,10 +148,10 @@
       </section>
     </main>
 
-    <!-- Opaque footer keeps the attribution readable over the background. -->
+    <!-- Solid footer keeps attribution readable over the background. -->
     <footer class="site-footer py-4 text-center">
-      <p class="mb-1">Built block by block with Bootstrap.</p>
-      <small>Blockbound Atlas &middot; Local data edition</small>
+      <p class="mb-1">Built by Vergel Jr. D. Cutaran</p>
+      <small>IT Student &middot; Local Data Atlas</small>
     </footer>
 
     <script

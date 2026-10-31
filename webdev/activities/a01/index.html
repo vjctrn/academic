@@ -1,12 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Page metadata, font, Bootstrap, custom styles, and favicon. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blockbound | Minecraft-Inspired Bento</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -18,14 +15,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="icon" href="assets/favicon.png" />
   </head>
-
   <body id="top">
-    <!-- Bootstrap navbar with a collapsible mobile navigation menu. -->
+    <!-- Bootstrap navigation collapses on smaller screens. -->
     <header class="navbar navbar-expand-md navbar-dark site-header sticky-top">
       <div class="container">
-        <!-- Brand link returns the visitor to the top of the page. -->
         <a
           class="navbar-brand site-brand d-inline-flex align-items-center"
           href="#top"
@@ -38,50 +33,38 @@
           />
           BLOCKBOUND
         </a>
-
         <button
-          class="navbar-toggler d-md-none"
-          id="nav-toggle"
+          class="navbar-toggler"
           type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#main-navigation"
           aria-controls="main-navigation"
           aria-expanded="false"
           aria-label="Open navigation menu"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- In-page navigation links for the three content areas. -->
         <nav
-          class="collapse navbar-collapse pt-3 pt-md-0"
+          class="collapse navbar-collapse"
           id="main-navigation"
           aria-label="Main navigation"
         >
-          <ul
-            class="navbar-nav flex-column flex-md-row align-items-stretch align-items-md-center gap-2"
-          >
+          <ul class="navbar-nav ms-auto align-items-md-center gap-md-2">
+            <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
             <li class="nav-item">
-              <a class="nav-link w-100 w-md-auto text-start" href="#top"
-                >Home</a
-              >
+              <a class="nav-link" href="#world">World</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link w-100 w-md-auto text-start" href="#world"
-                >World</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link w-100 w-md-auto text-start" href="#about"
-                >About</a
-              >
+              <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
               <button
-                class="theme-toggle d-block w-100 d-md-inline-block w-md-auto text-start"
+                class="btn btn-sm theme-toggle"
                 id="theme-toggle"
                 type="button"
                 aria-pressed="false"
               >
-                Dark Mode
+                Dark mode
               </button>
             </li>
           </ul>
@@ -89,23 +72,18 @@
       </div>
     </header>
 
+    <!-- Responsive cards use Bootstrap's grid; custom classes only define the theme. -->
     <main class="container bento-shell px-3 pt-3 pb-5 pt-md-4">
-      <!-- Intro row: hero content and player profile. -->
       <div class="row g-4 mb-4">
-        <!-- Hero card contains the page introduction and main visual. -->
         <section class="col-12 col-lg-8">
           <div class="bento-card p-3 p-md-4 hero-card">
-            <p class="eyebrow hero-welcome mt-3 mb-1">
-              Welcome to the overworld
-            </p>
+            <p class="eyebrow mt-3 mb-1">Welcome to the overworld</p>
             <h1 class="pixel-title display-3">Build your story.</h1>
             <p class="mb-0">
               A comfy corner for your builds, adventures, and favorite blocks.
             </p>
           </div>
         </section>
-
-        <!-- Profile card contains the player identity and external profile link. -->
         <section class="col-12 col-lg-4">
           <div class="bento-card p-3 p-md-4 profile-card">
             <img
@@ -121,15 +99,14 @@
               href="https://namemc.com/profile/t9kwa.1"
               target="_blank"
               rel="noopener noreferrer"
-              >View profile</a
             >
+              View profile
+            </a>
           </div>
         </section>
       </div>
 
-      <!-- Content row: featured modpack, player statistics, and quotes. -->
       <div class="row g-4 mb-4">
-        <!-- Featured project card and external modpack link. -->
         <section class="col-12 col-md-4" id="world">
           <div class="bento-card p-3 p-md-4 feature-card">
             <p class="eyebrow">Featured modpack</p>
@@ -144,12 +121,11 @@
               href="https://www.curseforge.com/minecraft/modpacks/raspberry-flavoured"
               target="_blank"
               rel="noopener noreferrer"
-              >Check out the modpack!</a
             >
+              Check out the modpack!
+            </a>
           </div>
         </section>
-
-        <!-- Static player statistics presented with Bootstrap flex utilities. -->
         <section class="col-12 col-md-4">
           <div class="bento-card p-3 p-md-4">
             <p class="eyebrow">Current stats</p>
@@ -179,48 +155,36 @@
             </div>
           </div>
         </section>
-
-        <!-- Short quotes that support the Minecraft-inspired theme. -->
         <section class="col-12 col-md-4">
           <div class="bento-card p-3 p-md-4 quote-card">
             <p class="eyebrow">Book of wisdom</p>
-            <blockquote class="mb-3">“Let it ride!”</blockquote>
+            <blockquote>“Let it ride!”</blockquote>
             <p class="fw-bold">- t9kwa</p>
-            <blockquote class="mb-3">“Always dig straight down.”</blockquote>
+            <blockquote>“Always dig straight down.”</blockquote>
             <p class="fw-bold">- yomii</p>
-            <blockquote class="mb-3">“Never punished.”</blockquote>
+            <blockquote>“Never punished.”</blockquote>
             <p class="fw-bold">- Schwarzer</p>
           </div>
         </section>
       </div>
 
-      <!-- Final row: project explanation and call-to-action. -->
       <div class="row g-4" id="about">
-        <!-- About card explains the page structure and technologies used. -->
         <section class="col-12 col-lg-7">
           <div class="bento-card p-3 p-md-4">
             <p class="eyebrow">About this world</p>
             <h2 class="pixel-title h3">Made block by block</h2>
             <p class="mb-0">
               A custom bento-grid layout built to showcase my web development
-              skills. This layout is designed to be simple, responsive, and easy
-              to navigate. This space serves as a practical sandbox for
-              exploring responsive web design, layout grids, and frontend
-              development principles step by step. Made with HTML, CSS,
-              JavaScript, and Bootstrap.
+              skills. This responsive sandbox explores layout grids and frontend
+              development principles with HTML, CSS, JavaScript, and Bootstrap.
             </p>
           </div>
         </section>
-
-        <!-- CTA card links visitors to Minecraft Classic. -->
         <section class="col-12 col-lg-5">
           <div class="bento-card p-3 p-md-4 cta-card">
             <p class="eyebrow">Ready to start?</p>
             <h2 class="pixel-title h3">Play now.</h2>
-            <p>
-              Want to give it a shot? Click the button below to jump into the
-              world of Minecraft.
-            </p>
+            <p>Want to give it a shot? Jump into the world of Minecraft.</p>
             <a
               class="block-button"
               href="https://classic.minecraft.net/"
@@ -234,12 +198,11 @@
       </div>
     </main>
 
-    <!-- Footer provides the page attribution. -->
-    <footer class="site-footer text-center">
+    <!-- The footer stays opaque so its text remains readable over the background. -->
+    <footer class="site-footer py-4 text-center">
       <p class="mb-1">Built by Vergel Jr. D. Cutaran</p>
-      <small>IT Student | Minecraft-inspired bento layout</small>
+      <small>IT Student &middot; Minecraft-inspired Bento Layout</small>
     </footer>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
