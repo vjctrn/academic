@@ -60,6 +60,7 @@
     </footer>
 
     <script src="js/theme.js"></script>
+    <script src="js/currency.js"></script>
     <script>
       const API = "https://www.cheapshark.com/api/1.0";
       const params = new URLSearchParams(window.location.search);
@@ -78,9 +79,9 @@
           document.querySelector("#back-link").href =
             `index.html?page=${encodeURIComponent(page)}`;
         try {
-          const response = await fetch(
+          const [response, rate] = await Promise.all([fetch(
             `${API}/games?id=${encodeURIComponent(id)}`,
-          );
+          ), getUsdToPhpRate()]);
           if (!response.ok) throw new Error("Unable to load game details.");
           const game = await response.json();
           const storesResponse = await fetch(`${API}/stores`);
@@ -101,7 +102,7 @@
                   <h2 class="display-6 fw-bold">${game.info.title}</h2>
                   <p class="lead">Compare the available prices for this game.</p>
                   <div class="list-group">
-                    ${game.deals.map((deal) => `<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID)}" target="_blank" rel="noopener noreferrer"><span>${storeNames.get(deal.storeID) || "Online store"}</span><strong>$${deal.price}</strong></a>`).join("")}
+                    ${game.deals.map((deal) => `<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID)}" target="_blank" rel="noopener noreferrer"><span>${storeNames.get(deal.storeID) || "Online store"}</span><strong>${formatPhp(deal.price, rate)} <small class="text-secondary fw-normal">($${deal.price})</small></strong></a>`).join("")}
                   </div>
                 </div>
               </div>

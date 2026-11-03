@@ -6,6 +6,7 @@ const summaryEl = document.querySelector("#results-summary");
 const statusEl = document.querySelector("#status");
 const stores = new Map();
 const fetchLimit = 100;
+const usdToPhpRate = getUsdToPhpRate();
 
 const setStatus = (message, type = "danger") => {
   statusEl.textContent = message;
@@ -37,7 +38,7 @@ const loadStores = async () => {
     });
 };
 
-const renderDeals = (deals) => {
+const renderDeals = (deals, rate) => {
   gamesEl.replaceChildren();
   deals.forEach((deal) => {
     const column = document.createElement("div");
@@ -49,7 +50,7 @@ const renderDeals = (deals) => {
         <div class="card-body">
           <p class="small text-secondary mb-1">${stores.get(deal.storeID) || "Online store"}</p>
           <h2 class="h5 card-title">${deal.title}</h2>
-          <p class="mb-3"><strong>$${deal.salePrice}</strong> <del class="small text-secondary">$${deal.normalPrice}</del></p>
+          <p class="mb-3"><strong>${formatPhp(deal.salePrice, rate)}</strong> <del class="small text-secondary">${formatPhp(deal.normalPrice, rate)}</del></p>
           <span class="badge text-bg-success align-self-start mb-3">${savings.toFixed(0)}% off</span>
           <a class="btn btn-outline-dark btn-sm" href="view.html?id=${encodeURIComponent(deal.gameID)}&page=${state.page}">View deals</a>
         </div>
@@ -90,10 +91,13 @@ const loadDeals = async () => {
   if (state.storeID) params.set("storeID", state.storeID);
   try {
     // ponytail: CheapShark currently repeats page results, so paginate one bounded API batch locally.
-    const allDeals = await request(`/deals?${params}`);
+    const [allDeals, rate] = await Promise.all([
+      request(`/deals?${params}`),
+      usdToPhpRate,
+    ]);
     const start = (state.page - 1) * state.limit;
     const deals = allDeals.slice(start, start + state.limit);
-    renderDeals(deals);
+    renderDeals(deals, rate);
     summaryEl.textContent = allDeals.length
       ? `${start + 1}-${start + deals.length} of ${allDeals.length} deals`
       : "0 deals found";
