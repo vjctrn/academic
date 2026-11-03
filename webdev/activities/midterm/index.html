@@ -1,30 +1,46 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>REG Vault | Game Library</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="bg-body-tertiary">
     <header class="bg-dark text-white shadow-sm">
       <div class="container py-4">
-        <p class="text-uppercase small fw-semibold mb-1 text-warning">REG Vault</p>
+        <p class="text-uppercase small fw-semibold mb-1 text-warning">
+          REG Vault
+        </p>
         <h1 class="display-6 fw-bold mb-1">Retro game library</h1>
-        <p class="mb-0 text-white-50">Browse, search, and discover games from classic systems.</p>
+        <p class="mb-0 text-white-50">
+          Browse, search, and discover games from classic systems.
+        </p>
       </div>
     </header>
 
     <main class="container py-4">
-      <section class="card border-0 shadow-sm mb-4" aria-labelledby="filters-heading">
+      <section
+        class="card border-0 shadow-sm mb-4"
+        aria-labelledby="filters-heading"
+      >
         <div class="card-body">
           <h2 id="filters-heading" class="h5">Find a game</h2>
           <form id="search-form" class="row g-2">
             <div class="col-12 col-md-6">
               <label class="visually-hidden" for="search">Search titles</label>
-              <input id="search" class="form-control" type="search" placeholder="Search by title">
+              <input
+                id="search"
+                class="form-control"
+                type="search"
+                placeholder="Search by title"
+              />
             </div>
             <div class="col-12 col-md-4">
               <label class="visually-hidden" for="system">System</label>
@@ -40,9 +56,15 @@
       </section>
 
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <p id="results-summary" class="text-secondary mb-0" aria-live="qlite">Loading games...</p>
-        <label class="small text-secondary" for="limit">Per page
-          <select id="limit" class="form-select form-select-sm d-inline-block w-auto ms-1">
+        <p id="results-summary" class="text-secondary mb-0" aria-live="lite">
+          Loading games...
+        </p>
+        <label class="small text-secondary" for="limit"
+          >Per page
+          <select
+            id="limit"
+            class="form-select form-select-sm d-inline-block w-auto ms-1"
+          >
             <option value="12">12</option>
             <option value="24">24</option>
             <option value="48">48</option>
@@ -61,13 +83,20 @@
       <p class="mb-1">Built by Vergel Jr. D. Cutaran</p>
       <small>
         Game data provided by
-        <a href="https://api.regvault.org" target="_blank" rel="noopener noreferrer">REG Vault API</a>
+        <a
+          href="https://api.regvault.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          >REG Vault API</a
+        >
       </small>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
     <script src="js/script.js"></script>
   </body>
 </html>
