@@ -6,7 +6,8 @@ const getUsdToPhpRate = () => {
       "https://api.frankfurter.app/latest?from=USD&to=PHP",
     )
       .then((response) => {
-        if (!response.ok) throw new Error("Unable to load the USD to PHP rate.");
+        if (!response.ok)
+          throw new Error("Unable to load the USD to PHP rate.");
         return response.json();
       })
       .then((data) => {

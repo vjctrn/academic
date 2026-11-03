@@ -1,0 +1,106 @@
+#filters-heading::before {
+  content: "QUERY / ";
+  color: var(--db-teal);
+  font-size: 0.7em;
+  letter-spacing: 0.08em;
+}
+
+#results-summary {
+  color: var(--db-muted) !important;
+  font-size: 0.85rem;
+}
+
+#results-summary::before {
+  content: "STATUS: ";
+  color: var(--db-green);
+  font-weight: 700;
+}
+
+.game-card {
+  overflow: hidden;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 16px rgba(16, 42, 67, 0.14) !important;
+}
+
+.game-art,
+.game-art-placeholder {
+  width: 100%;
+  border-bottom: 1px solid var(--db-line);
+  background: #e9f1f7;
+}
+
+.game-art {
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+.game-art-placeholder {
+  min-height: 110px;
+  display: grid;
+  place-items: center;
+  color: var(--db-muted);
+}
+
+.game-card .card-body::before {
+  content: "DEAL RECORD";
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--db-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.game-card .card-title {
+  color: var(--bs-body-color);
+  font-weight: 700;
+}
+
+.game-card strong {
+  color: var(--db-green);
+  font-size: 1.25rem;
+}
+
+.game-card del {
+  margin-left: 0.35rem;
+}
+
+.game-card .badge {
+  border-radius: 0.2rem;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+}
+
+.game-card .btn-outline-dark {
+  color: var(--db-blue);
+  border-color: var(--db-blue);
+  font-weight: 700;
+}
+
+.game-card .btn-outline-dark:hover {
+  color: #fff;
+  background-color: var(--db-blue);
+}
+
+.pagination .page-link {
+  color: var(--db-blue);
+  border-color: var(--db-line);
+  background-color: var(--bs-tertiary-bg);
+  margin: 0 2px;
+}
+
+.pagination .page-item.active .page-link {
+  color: #fff;
+  background-color: var(--db-blue);
+  border-color: var(--db-blue);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9aa8b5;
+}

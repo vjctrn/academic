@@ -1,0 +1,25 @@
+#details .list-group-item {
+  border-color: var(--db-line);
+}
+
+#details .detail-art-panel {
+  background-color: var(--bs-secondary-bg);
+}
+
+#details .detail-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--db-line);
+}
+
+#details .detail-label {
+  color: var(--db-teal);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+#details .list-group-item strong {
+  color: var(--db-green);
+}

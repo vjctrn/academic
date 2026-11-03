@@ -1,4 +1,3 @@
-const API = "https://www.cheapshark.com/api/1.0";
 const state = { page: 1, limit: 12, query: "", storeID: "" };
 const gamesEl = document.querySelector("#games");
 const paginationEl = document.querySelector("#pagination");
@@ -16,26 +15,6 @@ const setStatus = (message, type = "danger") => {
 const clearStatus = () => {
   statusEl.textContent = "";
   statusEl.className = "alert d-none";
-};
-
-const request = async (path) => {
-  const response = await fetch(`${API}${path}`);
-  if (!response.ok) throw new Error("Unable to load CheapShark data.");
-  return response.json();
-};
-
-const loadStores = async () => {
-  const data = await request("/stores");
-  const select = document.querySelector("#store");
-  data
-    .filter((store) => store.isActive)
-    .forEach((store) => {
-      stores.set(store.storeID, store.storeName);
-      const option = document.createElement("option");
-      option.value = store.storeID;
-      option.textContent = store.storeName;
-      select.append(option);
-    });
 };
 
 const renderDeals = (deals, rate) => {
@@ -90,7 +69,7 @@ const loadDeals = async () => {
   if (state.query) params.set("title", state.query);
   if (state.storeID) params.set("storeID", state.storeID);
   try {
-    // ponytail: CheapShark currently repeats page results, so paginate one bounded API batch locally.
+    // ponytail: CheapShark repeats page results, so paginate one bounded batch locally.
     const [allDeals, rate] = await Promise.all([
       request(`/deals?${params}`),
       usdToPhpRate,
@@ -122,6 +101,7 @@ document.querySelector("#limit").addEventListener("change", (event) => {
   loadDeals();
 });
 
-Promise.all([loadStores(), loadDeals()]).catch((error) =>
-  setStatus(error.message),
-);
+Promise.all([
+  loadStores(document.querySelector("#store"), stores),
+  loadDeals(),
+]).catch((error) => setStatus(error.message));
