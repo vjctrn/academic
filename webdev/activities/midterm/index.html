@@ -3,25 +3,51 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>REG Vault | Game Library</title>
+    <title>CheapShark | Game Deals</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="bg-body-tertiary">
     <header class="bg-dark text-white shadow-sm">
       <div class="container py-4">
-        <p class="text-uppercase small fw-semibold mb-1 text-warning">
-          REG Vault
-        </p>
-        <h1 class="display-6 fw-bold mb-1">Retro game library</h1>
-        <p class="mb-0 text-white-50">
-          Browse, search, and discover games from classic systems.
-        </p>
+        <div class="row align-items-start g-3">
+          <div class="col">
+            <p class="text-uppercase small fw-semibold mb-1 text-warning">
+              CheapShark Deals
+            </p>
+            <h1 class="display-6 fw-bold mb-1">
+              <a
+                class="sale-icon"
+                href="https://www.flaticon.com/free-icons/sale"
+                title="sale icons"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Sale icon attribution"
+                >🏷️</a
+              >
+              Discounts found here!
+            </h1>
+            <p class="mb-0 text-white-50">
+              Find the best prices for games across online stores.
+            </p>
+          </div>
+          <div class="col-auto">
+            <button
+              id="theme-toggle"
+              class="btn btn-outline-light btn-sm"
+              type="button"
+              aria-pressed="false"
+            >
+              ☾ Night mode
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -31,7 +57,7 @@
         aria-labelledby="filters-heading"
       >
         <div class="card-body">
-          <h2 id="filters-heading" class="h5">Find a game</h2>
+          <h2 id="filters-heading" class="h5">Find a deal</h2>
           <form id="search-form" class="row g-2">
             <div class="col-12 col-md-6">
               <label class="visually-hidden" for="search">Search titles</label>
@@ -39,13 +65,13 @@
                 id="search"
                 class="form-control"
                 type="search"
-                placeholder="Search by title"
+                placeholder="Search game titles"
               />
             </div>
             <div class="col-12 col-md-4">
-              <label class="visually-hidden" for="system">System</label>
-              <select id="system" class="form-select">
-                <option value="">All systems</option>
+              <label class="visually-hidden" for="store">Store</label>
+              <select id="store" class="form-select">
+                <option value="">All stores</option>
               </select>
             </div>
             <div class="col-12 col-md-2 d-grid">
@@ -57,7 +83,7 @@
 
       <div class="d-flex justify-content-between align-items-center mb-3">
         <p id="results-summary" class="text-secondary mb-0" aria-live="polite">
-          Loading games...
+          Loading deals...
         </p>
         <label class="small text-secondary" for="limit"
           >Per page
@@ -82,13 +108,22 @@
     <footer class="site-footer mt-5 py-4 text-center">
       <p class="mb-1">Built by Vergel Jr. D. Cutaran</p>
       <small>
-        Game data provided by
+        Game deal data provided by
         <a
-          href="https://api.regvault.org"
+          href="https://apidocs.cheapshark.com/"
           target="_blank"
           rel="noopener noreferrer"
-          >REG Vault API</a
+          >CheapShark API</a
         >
+        <span class="d-block mt-2">
+          <a
+            href="https://www.flaticon.com/free-icons/sale"
+            title="sale icons"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Sale icons created by Pixel perfect - Flaticon</a
+          >
+        </span>
       </small>
     </footer>
 
@@ -97,6 +132,7 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script src="js/theme.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
