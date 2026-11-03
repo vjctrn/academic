@@ -1,4 +1,4 @@
-/* Core atlas palette; Bootstrap utilities provide most layout and spacing. */
+/* Atlas colors are reused by the cards and Bootstrap-aligned controls. */
 :root {
   --atlas-ink: #17211d;
   --atlas-paper: #f6f1df;
@@ -7,9 +7,9 @@
   --atlas-gold: #f6c453;
   --atlas-stone: #2d3740;
   --atlas-header-text: #f6f1df;
-  --atlas-shadow: 0 8px 0 rgba(23, 33, 29, 0.25);
 }
 
+/* Layer a readable color wash over the supplied background image. */
 body {
   min-height: 100vh;
   color: var(--atlas-ink);
@@ -20,13 +20,12 @@ body {
     var(--atlas-paper);
 }
 
+/* Keep the custom palette synchronized with Bootstrap dark mode. */
 [data-bs-theme="dark"] {
-  /* Bootstrap's theme attribute switches these custom variables as well. */
   --atlas-ink: #f6f1df;
   --atlas-paper: #26332f;
   --atlas-green: #70b64b;
   --atlas-green-dark: #b6e3a0;
-  --atlas-stone: #17211d;
   --atlas-header-text: #b6e3a0;
 }
 
@@ -37,75 +36,68 @@ body {
     var(--atlas-paper);
 }
 
+/* Header and footer use one opaque surface for readable text. */
 .site-header,
 .site-footer {
-  /* Keep navigation and attribution on a solid Minecraft-inspired surface. */
   --bs-navbar-color: var(--atlas-header-text);
   --bs-navbar-hover-color: var(--atlas-gold);
   --bs-navbar-brand-color: var(--atlas-header-text);
   --bs-navbar-brand-hover-color: var(--atlas-gold);
-  color: var(--atlas-header-text) !important;
+  color: var(--atlas-header-text);
   background: var(--atlas-stone);
-  border-bottom: 3px solid var(--atlas-gold);
+  border-color: var(--atlas-gold);
+}
+
+.site-header {
+  border-bottom: 3px solid;
 }
 
 .site-footer {
-  border-top: 3px solid var(--atlas-gold);
-  border-bottom: 0;
+  border-top: 3px solid;
 }
 
 .atlas-brand,
 .site-header .nav-link {
-  color: var(--atlas-header-text) !important;
-}
-
-.site-header.navbar-dark .navbar-nav .nav-link {
-  color: var(--atlas-header-text) !important;
+  color: var(--atlas-header-text);
 }
 
 .atlas-brand:hover,
-.site-header .nav-link:hover,
-.site-header.navbar-dark .navbar-nav .nav-link:hover {
-  color: var(--atlas-gold) !important;
-}
-
-.site-header .navbar-brand {
-  color: var(--atlas-header-text) !important;
+.site-header .nav-link:hover {
+  color: var(--atlas-gold);
 }
 
 .atlas-brand,
-.pixel-title {
-  /* Pixel font is reserved for titles and key labels. */
+.pixel-title,
+.eyebrow {
   font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
-  letter-spacing: -0.04em;
 }
 
 .atlas-brand {
   font-size: 0.9rem;
   letter-spacing: 0.05em;
-  line-height: 1;
-}
-
-.eyebrow {
-  color: var(--atlas-gold);
 }
 
 .atlas-logo {
   width: 32px;
   height: 32px;
   object-fit: contain;
-  vertical-align: middle;
 }
 
+.eyebrow {
+  color: var(--atlas-gold);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+/* Shared card geometry keeps generated and static panels consistent. */
 .hero-panel,
 .about-panel,
 .mob-card,
 .biome-card {
-  /* Custom card treatment gives Bootstrap's grid a blocky atlas style. */
+  background: var(--atlas-paper);
   border: 3px solid var(--atlas-ink);
   border-radius: 0.5rem;
-  box-shadow: var(--atlas-shadow);
-  background: var(--atlas-paper);
+  box-shadow: 0 8px 0 rgba(23, 33, 29, 0.25);
 }
 
 .hero-panel {
@@ -124,20 +116,7 @@ body {
   color: var(--atlas-green-dark);
 }
 
-.eyebrow {
-  margin-bottom: 0.5rem;
-  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-}
-
-.compass {
-  font-size: 2.5rem;
-  color: var(--atlas-gold);
-}
-
 .btn-atlas {
-  /* Main CTA uses a custom shadow while retaining Bootstrap button behavior. */
   color: #fff;
   background: var(--atlas-green);
   border-color: var(--atlas-ink);
@@ -150,12 +129,12 @@ body {
 }
 
 .theme-toggle {
-  color: var(--atlas-header-text) !important;
-  border-color: var(--atlas-header-text) !important;
+  color: var(--atlas-header-text);
+  border-color: var(--atlas-header-text);
 }
 
 .theme-toggle:hover {
-  color: var(--atlas-stone) !important;
+  color: var(--atlas-stone);
   background: var(--atlas-header-text);
 }
 
@@ -170,14 +149,14 @@ body {
   transform: translateY(-4px);
 }
 
-/* Asset wrappers keep animated and static mob images at the same size. */
+/* Fixed image boxes prevent different assets from changing card height. */
 .mob-icon {
   display: grid;
   width: 58px;
   height: 58px;
   place-items: center;
-  border-radius: 0.5rem;
   overflow: hidden;
+  border-radius: 0.5rem;
 }
 
 .mob-icon img,
@@ -194,8 +173,6 @@ body {
 }
 
 .difficulty-bar {
-  /* Progress width is supplied inline from each mob's difficulty value. */
-  height: 0.5rem;
   background: var(--atlas-green);
 }
 

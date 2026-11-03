@@ -1,306 +1,65 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Document metadata and the local favicon. -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A clean Minecraft server status dashboard powered by mcsrvstat.us."
-    />
-    <title>Blockwatch | Minecraft Server Radar</title>
-    <link rel="icon" href="assets/favicon.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Bootstrap provides the layout, responsive utilities, and icons used below. -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REG Vault | Game Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <!-- This overlay adds a subtle texture without affecting page content. -->
-    <div class="page-noise"></div>
-    <!-- Solid Minecraft-inspired header for reliable text contrast. -->
-    <nav class="navbar navbar-expand-lg py-3 bg-solid">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-          <img class="brand-mark" src="assets/favicon.png" alt="" />
-          <span>BLOCK<span class="text-lime">WATCH</span></span>
-        </a>
-        <span class="nav-caption d-none d-sm-block"
-          >SERVER INTELLIGENCE / 01</span
-        >
-        <button
-          class="btn theme-toggle ms-auto d-inline-flex align-items-center justify-content-center p-0"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle theme"
-        >
-          <i class="bi bi-sun-fill"></i>
-        </button>
+  <body class="bg-body-tertiary">
+    <header class="bg-dark text-white shadow-sm">
+      <div class="container py-4">
+        <p class="text-uppercase small fw-semibold mb-1 text-warning">REG Vault</p>
+        <h1 class="display-6 fw-bold mb-1">Retro game library</h1>
+        <p class="mb-0 text-white-50">Browse, search, and discover games from classic systems.</p>
       </div>
-    </nav>
+    </header>
 
-    <main>
-      <!-- Intro area: server search, edition selector, and quick examples. -->
-      <section class="hero-section container pt-5 pb-5">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-7">
-            <p class="eyebrow mb-3">
-              <span class="pulse-dot"></span> LIVE SERVER RADAR
-            </p>
-            <h1>Know your<br /><span class="text-lime">block world.</span></h1>
-            <p class="hero-copy">
-              A quick read on the servers you care about. Paste an address and
-              get the signal, from player count to protocol details.
-            </p>
-            <form
-              class="search-panel d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 p-2 ps-sm-3"
-              id="serverForm"
-            >
-              <i class="bi bi-terminal-fill search-icon d-none d-sm-inline"></i>
-              <label class="visually-hidden" for="serverInput"
-                >Minecraft server address</label
-              >
-              <input
-                id="serverInput"
-                class="form-control flex-grow-1"
-                type="text"
-                placeholder="play.example.net"
-                autocomplete="off"
-                required
-              />
-              <button class="btn btn-lime align-self-sm-auto" type="submit">
-                Scan server <i class="bi bi-arrow-up-right ms-1"></i>
-              </button>
-            </form>
-            <div
-              class="btn-group server-type-toggle mt-3"
-              role="group"
-              aria-label="Minecraft server edition"
-            >
-              <input
-                class="btn-check"
-                type="radio"
-                name="serverType"
-                id="javaType"
-                value="java"
-                checked
-              />
-              <label class="btn btn-outline-success" for="javaType"
-                ><i class="bi bi-cup-hot me-1"></i> Java</label
-              >
-              <input
-                class="btn-check"
-                type="radio"
-                name="serverType"
-                id="bedrockType"
-                value="bedrock"
-              />
-              <label class="btn btn-outline-success" for="bedrockType"
-                ><i class="bi bi-gem me-1"></i> Bedrock</label
-              >
+    <main class="container py-4">
+      <section class="card border-0 shadow-sm mb-4" aria-labelledby="filters-heading">
+        <div class="card-body">
+          <h2 id="filters-heading" class="h5">Find a game</h2>
+          <form id="search-form" class="row g-2">
+            <div class="col-12 col-md-6">
+              <label class="visually-hidden" for="search">Search titles</label>
+              <input id="search" class="form-control" type="search" placeholder="Search by title">
             </div>
-            <div class="recent-line mt-3">
-              <span>TRY A SERVER</span>
-              <button
-                class="server-chip"
-                data-server="mc.mineberry.org"
-                data-server-type="java"
-              >
-                MineBerry
-              </button>
-              <button
-                class="server-chip"
-                data-server="hypixel.net"
-                data-server-type="java"
-              >
-                Hypixel
-              </button>
-              <button
-                class="server-chip"
-                data-server="play.cubecraft.net"
-                data-server-type="java"
-              >
-                CubeCraft
-              </button>
-              <button
-                class="server-chip"
-                data-server="geo.hivebedrock.network"
-                data-server-type="bedrock"
-              >
-                The Hive
-              </button>
+            <div class="col-12 col-md-4">
+              <label class="visually-hidden" for="system">System</label>
+              <select id="system" class="form-select">
+                <option value="">All systems</option>
+              </select>
             </div>
-          </div>
-          <div class="col-lg-5 hero-art-wrap">
-            <div class="hero-art">
-              <img
-                src="assets/minecraft-hero.png"
-                alt="Minecraft landscape illustration"
-              />
-              <div class="art-label">
-                <span class="pulse-dot"></span> SIGNAL ACQUIRED
-              </div>
+            <div class="col-12 col-md-2 d-grid">
+              <button class="btn btn-warning" type="submit">Search</button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
 
-      <!-- Live API readout. JavaScript fills these cards after a scan. -->
-      <section class="container dashboard-section" aria-live="polite">
-        <div
-          class="status-heading d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-end gap-3 gap-sm-0 mb-3"
-        >
-          <div>
-            <p class="eyebrow mb-2">CURRENT READOUT</p>
-            <h2 id="serverTitle">Enter a server to begin</h2>
-          </div>
-          <span class="status-badge status-idle" id="statusBadge">WAITING</span>
-        </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <p id="results-summary" class="text-secondary mb-0" aria-live="polite">Loading games...</p>
+        <label class="small text-secondary" for="limit">Per page
+          <select id="limit" class="form-select form-select-sm d-inline-block w-auto ms-1">
+            <option value="12">12</option>
+            <option value="24">24</option>
+            <option value="48">48</option>
+          </select>
+        </label>
+      </div>
 
-        <div
-          class="alert alert-danger d-none"
-          id="errorMessage"
-          role="alert"
-        ></div>
-        <div class="row g-3">
-          <div class="col-md-6 col-xl-3">
-            <article class="data-card accent-card h-100 p-4">
-              <div class="card-label">
-                AVAILABILITY <i class="bi bi-broadcast-pin"></i>
-              </div>
-              <div class="stat-value" id="onlineValue">—</div>
-              <p class="stat-note mb-0" id="onlineNote">
-                Awaiting a server address
-              </p>
-              <div class="mini-bars mt-4">
-                <span></span><span></span><span></span><span></span><span></span
-                ><span></span>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <article class="data-card h-100 p-4">
-              <div class="card-label">
-                PLAYERS ONLINE <i class="bi bi-people-fill"></i>
-              </div>
-              <div class="stat-value" id="playerValue">—</div>
-              <p class="stat-note mb-0">
-                of <span id="maxPlayers">—</span> capacity
-              </p>
-              <div
-                class="progress mt-4"
-                role="progressbar"
-                aria-label="Players online"
-              >
-                <div class="progress-bar" id="playerProgress"></div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <article class="data-card h-100 p-4">
-              <div class="card-label">
-                VERSION <i class="bi bi-code-slash"></i>
-              </div>
-              <div class="stat-value stat-version" id="versionValue">—</div>
-              <p class="stat-note mb-0">Detected protocol</p>
-              <div class="version-line mt-4">
-                <span id="protocolValue">Protocol —</span
-                ><i class="bi bi-check-circle-fill"></i>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-6 col-xl-3">
-            <article class="data-card h-100 p-4">
-              <div class="card-label">
-                SERVER ADDRESS <i class="bi bi-geo-alt-fill"></i>
-              </div>
-              <div class="address-value" id="addressValue">—</div>
-              <p class="stat-note mb-0">Your target endpoint</p>
-              <div class="address-line mt-4" id="portValue">Port —</div>
-            </article>
-          </div>
-        </div>
-
-        <div class="row g-3 mt-1">
-          <div class="col-lg-7">
-            <article class="data-card motd-card h-100 p-4">
-              <div
-                class="d-flex justify-content-between align-items-center mb-4"
-              >
-                <div class="card-label mb-0">
-                  SERVER MESSAGE <i class="bi bi-chat-square-text-fill"></i>
-                </div>
-                <span class="tiny-tag">MOTD</span>
-              </div>
-              <div class="motd-box p-3" id="motdValue">
-                Your server's message of the day will appear here.
-              </div>
-              <div
-                class="d-flex justify-content-between align-items-center mt-4"
-              >
-                <span class="stat-note"
-                  >Last checked <span id="lastChecked">—</span></span
-                >
-                <button class="refresh-btn" id="refreshButton" type="button">
-                  <i class="bi bi-arrow-clockwise"></i> Refresh
-                </button>
-              </div>
-            </article>
-          </div>
-          <div class="col-lg-5">
-            <article class="data-card h-100 p-4">
-              <div
-                class="d-flex justify-content-between align-items-center mb-4"
-              >
-                <div class="card-label mb-0">
-                  PLAYER PREVIEW <i class="bi bi-person-fill"></i>
-                </div>
-                <span class="tiny-tag" id="playerTag">0 PLAYERS</span>
-              </div>
-              <div class="player-list row row-cols-2 g-2" id="playerList">
-                <div class="empty-state d-flex align-items-center gap-2">
-                  <i class="bi bi-person-plus"></i
-                  ><span>No player data yet</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+      <div id="status" class="alert d-none" role="alert"></div>
+      <div id="games" class="row g-3"></div>
+      <nav class="mt-4" aria-label="Game pages">
+        <ul id="pagination" class="pagination justify-content-center"></ul>
+      </nav>
     </main>
-    <!-- Solid footer keeps the attribution readable over the page background. -->
-    <footer class="bg-solid">
-      <div
-        class="container py-4 d-flex flex-wrap justify-content-between gap-2"
-      >
-        <span>BLOCKWATCH / Built for curious players</span>
-        <span
-          >DATA VIA
-          <a href="https://api.mcsrvstat.us/" target="_blank" rel="noreferrer"
-            >MCSRVSTAT.US</a
-          ></span
-        >
-      </div>
-    </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

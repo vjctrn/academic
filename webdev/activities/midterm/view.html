@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game details | REG Vault</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body class="bg-body-tertiary">
+    <header class="bg-dark text-white shadow-sm">
+      <div class="container py-4">
+        <p class="text-uppercase small fw-semibold mb-1 text-warning">REG Vault</p>
+        <h1 class="display-6 fw-bold mb-0">Game details</h1>
+      </div>
+    </header>
+    <main class="container py-4">
+      <a id="back-link" class="btn btn-outline-secondary mb-4" href="index.html">Back to library</a>
+      <div id="status" class="alert d-none" role="alert"></div>
+      <article id="details" class="card border-0 shadow-sm overflow-hidden"></article>
+    </main>
+    <script>
+      const API = 'https://api.regvault.org/api/v1';
+      const ASSET_URL = 'https://api.regvault.org';
+      const params = new URLSearchParams(window.location.search);
+      const detailsEl = document.querySelector('#details');
+      const statusEl = document.querySelector('#status');
+      const formatSystem = (system) => system.replace(/[-_]/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
+      const showError = (message) => {
+        statusEl.textContent = message;
+        statusEl.className = 'alert alert-danger';
+      };
+
+      const loadGame = async () => {
+        const system = params.get('system');
+        const hash = params.get('hash');
+        if (!system || !hash) return showError('A game was not specified.');
+        const page = params.get('page');
+        if (page) document.querySelector('#back-link').href = `index.html?page=${encodeURIComponent(page)}`;
+        try {
+          const response = await fetch(`${API}/game/${encodeURIComponent(system)}/${encodeURIComponent(hash)}`);
+          if (!response.ok) throw new Error('Unable to load game details.');
+          const game = await response.json();
+          const art = game.assets?.box_front ? `${ASSET_URL}${game.assets.box_front}` : '';
+          document.title = `${game.title_en || 'Game'} | REG Vault`;
+          detailsEl.innerHTML = `
+            <div class="row g-0">
+              <div class="col-md-4 bg-dark d-flex align-items-center justify-content-center p-4">
+                ${art ? `<img class="img-fluid rounded shadow" src="${art}" alt="Box art for ${game.title_en || 'game'}">` : '<span class="text-white-50">No cover art</span>'}
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4 p-lg-5">
+                  <p class="text-secondary mb-1">${formatSystem(game.system)}${game.year ? ` · ${game.year}` : ''}</p>
+                  <h2 class="display-6 fw-bold">${game.title_en || 'Untitled game'}</h2>
+                  <p class="lead">${game.description_en || 'No description available.'}</p>
+                  <dl class="row">
+                    <dt class="col-sm-3">Developer</dt><dd class="col-sm-9">${game.developer || 'Unknown'}</dd>
+                    <dt class="col-sm-3">Publisher</dt><dd class="col-sm-9">${game.publisher || 'Unknown'}</dd>
+                    <dt class="col-sm-3">Genre</dt><dd class="col-sm-9">${game.genre?.join(', ') || 'Unknown'}</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>`;
+        } catch (error) {
+          showError(error.message);
+        }
+      };
+      loadGame();
+    </script>
+  </body>
+</html>

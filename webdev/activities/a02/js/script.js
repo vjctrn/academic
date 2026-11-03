@@ -1,4 +1,4 @@
-// Local content data used to build the mob and biome directories.
+// Local data is the single source for the mob and biome cards.
 const mobs = [
   {
     name: "Allay",
@@ -63,20 +63,15 @@ const biomes = [
   },
 ];
 
-// Cache dynamic containers and Bootstrap's collapsible navigation controls.
-const mobList = document.querySelector("#mob-list");
-const biomeList = document.querySelector("#biome-list");
+// Cache the page targets used by rendering and interaction.
 const themeToggle = document.querySelector("#theme-toggle");
 const navigation = document.querySelector("#main-navigation");
-const navigationToggle = document.querySelector(".navbar-toggler");
+const theme = document.documentElement;
 
 function renderMobs() {
-  // Bootstrap grid classes make each generated mob card responsive.
-  let mobMarkup = "";
-
-  for (let i = 0; i < mobs.length; i += 1) {
-    const mob = mobs[i];
-    mobMarkup += `
+  document.querySelector("#mob-list").innerHTML = mobs
+    .map(
+      (mob) => `
         <div class="col-md-6 col-xl-3">
           <article class="mob-card p-3">
             <div class="d-flex justify-content-between align-items-start mb-3">
@@ -99,20 +94,16 @@ function renderMobs() {
               </div>
             </div>
           </article>
-        </div>
-      `;
-  }
-
-  mobList.innerHTML = mobMarkup;
+        </div>`,
+    )
+    .join("");
 }
 
+// Each renderer converts one local data set into Bootstrap grid markup.
 function renderBiomes() {
-  // Build biome cards from the local data without requiring another page.
-  let biomeMarkup = "";
-
-  for (let i = 0; i < biomes.length; i += 1) {
-    const biome = biomes[i];
-    biomeMarkup += `
+  document.querySelector("#biome-list").innerHTML = biomes
+    .map(
+      (biome) => `
         <div class="col-md-4">
           <article class="biome-card p-4 d-flex gap-3 align-items-center">
             <img class="biome-icon" src="${biome.image}" alt="${biome.name}" />
@@ -122,65 +113,43 @@ function renderBiomes() {
               <span class="badge text-bg-secondary">${biome.status}</span>
             </div>
           </article>
-        </div>
-      `;
-  }
-
-  biomeList.innerHTML = biomeMarkup;
+        </div>`,
+    )
+    .join("");
 }
 
 function renderStats() {
-  // Keep the summary counts tied to the source arrays automatically.
-  const stats = [
-    { value: mobs.length, label: "mobs" },
-    { value: biomes.length, label: "biomes" },
-  ];
-
-  let statsMarkup = "";
-  for (let i = 0; i < stats.length; i += 1) {
-    const stat = stats[i];
-    statsMarkup += `
+  document.querySelector("#atlas-stats").innerHTML = [
+    ["mobs", mobs.length],
+    ["biomes", biomes.length],
+  ]
+    .map(
+      ([label, value]) => `
         <div class="col-6">
           <div class="border border-dark rounded p-3">
-            <span class="stat-number">${stat.value}</span>
-            <small>${stat.label}            </small>
+            <span class="stat-number">${value}</span>
+            <small>${label}</small>
           </div>
-        </div>
-      `;
-  }
-
-  document.querySelector("#atlas-stats").innerHTML = statsMarkup;
+        </div>`,
+    )
+    .join("");
 }
 
 themeToggle.addEventListener("click", () => {
-  // data-bs-theme updates Bootstrap and the custom dark-mode variables together.
   const nextTheme =
-    document.documentElement.getAttribute("data-bs-theme") === "dark"
-      ? "light"
-      : "dark";
-  document.documentElement.setAttribute("data-bs-theme", nextTheme);
+    theme.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+  theme.setAttribute("data-bs-theme", nextTheme);
   themeToggle.textContent = nextTheme === "dark" ? "Light mode" : "Dark mode";
+  themeToggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
 });
 
-navigation.addEventListener("shown.bs.collapse", () => {
-  // Keep the menu button's accessible label synchronized with its state.
-  navigationToggle.setAttribute("aria-label", "Close navigation menu");
-});
-
-navigation.addEventListener("hidden.bs.collapse", () => {
-  navigationToggle.setAttribute("aria-label", "Open navigation menu");
-});
-
-const navigationLinks = navigation.querySelectorAll(".nav-link");
-for (let i = 0; i < navigationLinks.length; i += 1) {
-  const link = navigationLinks[i];
-  link.addEventListener("click", () => {
-    // Close the mobile menu after navigating to an in-page section.
+// Close the Bootstrap menu after an in-page navigation click.
+navigation.addEventListener("click", (event) => {
+  if (event.target.matches(".nav-link")) {
     bootstrap.Collapse.getOrCreateInstance(navigation).hide();
-  });
-}
+  }
+});
 
-// Initial render: populate all generated sections once the script loads.
 renderMobs();
 renderBiomes();
 renderStats();

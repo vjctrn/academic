@@ -1,181 +1,151 @@
-/* Minecraft-inspired design tokens used throughout the bento layout. */
+/* Shared colors for the light theme and block-style components. */
 :root {
-  --mc-grass: #5b9f3b;
-  --mc-grass-dark: #356e2a;
-  --mc-dirt: #8b572a;
-  --mc-stone: #2d3740;
-  --mc-paper: #f6f1df;
-  --mc-gold: #f6c453;
-  --mc-sand: #d9c4a7;
-  --mc-sky: 191, 232, 255;
-  --mc-ink: #17211d;
-  --mc-header: #2d3740;
-  --mc-header-text: #f6f1df;
-  --page-overlay: rgba(var(--mc-sky), 0.35);
-  --card-shadow: 0 8px 0 rgba(23, 33, 29, 0.35);
+  --block-ink: #17211d;
+  --block-paper: #f6f1df;
+  --block-green: #4d8c38;
+  --block-green-dark: #2d5d2a;
+  --block-gold: #f6c453;
+  --block-dirt: #8b572a;
+  --block-sand: #d9c4a7;
+  --block-header: #2d3740;
+  --block-header-text: #f6f1df;
 }
 
+/* The image and overlay create the page texture without extra markup. */
 body {
-  /* The background image supplies texture while the overlay controls contrast. */
   min-height: 100vh;
-  color: var(--mc-ink);
+  color: var(--block-ink);
   font-family: "Trebuchet MS", Arial, sans-serif;
   background:
-    linear-gradient(var(--page-overlay), var(--page-overlay)),
+    linear-gradient(rgba(191, 232, 255, 0.35), rgba(191, 232, 255, 0.35)),
     url("../assets/background-light.jpg") center / cover fixed,
-    var(--mc-paper);
-  transition:
-    color 0.3s,
-    background-color 0.3s;
+    var(--block-paper);
 }
 
+/* Bootstrap's theme attribute switches the custom palette too. */
 [data-bs-theme="dark"] {
-  /* Bootstrap's theme attribute updates the custom palette for dark mode. */
-  --mc-grass: #6fbf44;
-  --mc-grass-dark: #b6e3a0;
-  --mc-dirt: #a96d38;
-  --mc-stone: #17211d;
-  --mc-paper: #26332f;
-  --mc-gold: #f6c453;
-  --mc-sand: #4a392b;
-  --mc-ink: #f6f1df;
-  --page-overlay: rgba(23, 33, 29, 0.55);
+  --block-ink: #f6f1df;
+  --block-paper: #26332f;
+  --block-green: #6fbf44;
+  --block-green-dark: #b6e3a0;
+  --block-dirt: #a96d38;
+  --block-sand: #4a392b;
 }
 
 [data-bs-theme="dark"] body {
   background:
-    linear-gradient(var(--page-overlay), var(--page-overlay)),
+    linear-gradient(rgba(23, 33, 29, 0.55), rgba(23, 33, 29, 0.55)),
     url("../assets/background-dark.jpg") center / cover fixed,
-    var(--mc-paper);
+    var(--block-paper);
 }
 
+/* Header and footer share one solid, high-contrast surface. */
 .site-header,
 .site-footer {
-  /* Solid surfaces keep header and footer text readable over the texture. */
-  color: var(--mc-header-text);
-  background: var(--mc-header);
-  border-color: var(--mc-header-text);
+  --bs-navbar-color: var(--block-header-text);
+  --bs-navbar-hover-color: var(--block-gold);
+  --bs-navbar-brand-color: var(--block-header-text);
+  --bs-navbar-brand-hover-color: var(--block-gold);
+  color: var(--block-header-text);
+  background: var(--block-header);
+  border-color: var(--block-gold);
 }
 
 .site-header {
   border-bottom: 3px solid;
 }
 
+.site-footer {
+  border-top: 3px solid;
+}
+
 .site-brand,
 .site-header .nav-link {
-  /* Keep navigation text aligned with the custom header palette. */
-  color: var(--mc-header-text);
+  color: var(--block-header-text);
+}
+
+.site-brand,
+.pixel-title,
+.eyebrow {
+  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
 }
 
 .site-brand {
-  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
 }
 
-.site-brand .site-logo {
-  display: inline-block;
-  width: 32px !important;
-  height: 32px !important;
+.site-logo {
+  width: 32px;
+  height: 32px;
   object-fit: contain;
-  vertical-align: middle;
 }
 
 .site-brand:hover,
 .site-header .nav-link:hover {
-  color: var(--mc-gold);
-}
-
-.navbar-toggler {
-  border: 2px solid var(--mc-header-text);
-}
-
-.navbar-toggler:focus {
-  box-shadow: 0 0 0 0.2rem rgba(246, 196, 83, 0.5);
-}
-
-.navbar-toggler-icon {
-  filter: brightness(0) invert(1);
+  color: var(--block-gold);
 }
 
 .theme-toggle {
-  /* Custom button treatment complements the Bootstrap navbar utilities. */
   padding: 0.35rem 0.6rem;
-  border: 2px solid var(--mc-header-text);
-  color: var(--mc-header-text);
+  color: var(--block-header-text);
   background: transparent;
+  border: 2px solid var(--block-header-text);
   font-size: 0.8rem;
   font-weight: 700;
 }
 
 .theme-toggle:hover {
-  color: var(--mc-header);
-  background: var(--mc-header-text);
+  color: var(--block-header);
+  background: var(--block-header-text);
 }
 
 .bento-shell {
-  /* Limit the reading width while Bootstrap handles the column layout. */
   max-width: 1180px;
 }
 
+/* Every content card gets the same border, shadow, and paper surface. */
 .bento-card {
-  /* Shared block styling for hero, profile, content, and CTA cards. */
   height: 100%;
-  color: var(--mc-ink);
-  border: 4px solid var(--mc-ink);
+  color: var(--block-ink);
+  background: var(--block-paper);
+  border: 4px solid var(--block-ink);
   border-radius: 0.5rem;
-  box-shadow: var(--card-shadow);
-  background: var(--mc-paper);
-  overflow: hidden;
+  box-shadow: 0 8px 0 rgba(23, 33, 29, 0.35);
 }
 
 .hero-card {
-  /* Hero uses the uploaded landscape asset with a readability gradient. */
   min-height: 310px;
-  color: var(--bs-white);
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
+  color: #fff;
   background:
-    linear-gradient(transparent 35%, rgba(var(--bs-black-rgb), 0.8)),
+    linear-gradient(transparent 35%, rgba(0, 0, 0, 0.8)),
     url("../assets/minecraft-hero.png") center / cover,
-    var(--mc-grass);
+    var(--block-green);
 }
 
 .profile-card {
-  background: var(--mc-gold);
+  background: var(--block-gold);
 }
 
 .feature-card {
-  color: var(--bs-white);
-  background: var(--mc-grass);
+  color: #fff;
+  background: var(--block-green);
 }
 
 .quote-card {
-  background: var(--mc-sand);
+  background: var(--block-sand);
 }
 
 .cta-card {
-  color: var(--bs-white);
-  background: var(--mc-dirt);
+  color: #fff;
+  background: var(--block-dirt);
 }
 
-[data-bs-theme="dark"] .profile-card {
-  color: var(--mc-ink);
-}
-
-[data-bs-theme="dark"] .quote-card {
-  color: var(--mc-ink);
-}
-
-/* Section labels use the pixel font and the current theme's green accent. */
 .eyebrow {
   margin-bottom: 0.5rem;
-  color: var(--mc-grass-dark);
-  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  color: var(--block-green-dark);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -185,55 +155,34 @@ body {
   color: inherit;
 }
 
-.hero-welcome {
-  /* Outline the text so it remains visible over the hero image. */
-  text-shadow:
-    1px 0 #000,
-    -1px 0 #000,
-    0 1px #000,
-    0 -1px #000;
-}
-
 .pixel-title {
-  margin: 0;
-  font-family: "Press Start 2P", "Trebuchet MS", Arial, sans-serif;
-  font-weight: 900;
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
 .avatar-placeholder {
-  /* Consistent frame for the supplied avatar asset. */
   width: 76px;
   height: 76px;
-  margin-bottom: 1rem;
-  border: 4px solid var(--mc-ink);
-  border-radius: 50%;
   object-fit: cover;
-  background: var(--mc-stone);
+  border: 4px solid var(--block-ink);
+  border-radius: 50%;
 }
 
+/* These links keep the block appearance while remaining ordinary anchors. */
 .block-button {
-  /* Block-style links are intentionally custom; layout remains Bootstrap-based. */
   display: inline-block;
   padding: 0.7rem 1rem;
-  color: var(--mc-ink);
-  background: var(--mc-paper);
-  border: 3px solid var(--mc-ink);
+  color: var(--block-ink);
+  background: var(--block-paper);
+  border: 3px solid var(--block-ink);
+  box-shadow: 4px 4px 0 var(--block-ink);
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--mc-ink);
 }
 
 .block-button:hover {
-  color: var(--bs-white);
-  background: var(--mc-grass-dark);
+  color: #fff;
+  background: var(--block-green-dark);
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--mc-ink);
-}
-
-.site-footer {
-  /* Match the header border treatment at the bottom of the page. */
-  padding: 1.25rem 1rem;
-  border-top: 3px solid;
+  box-shadow: 2px 2px 0 var(--block-ink);
 }
