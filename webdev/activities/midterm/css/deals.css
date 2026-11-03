@@ -49,12 +49,23 @@
 }
 
 .game-card .card-body::before {
-  content: "DEAL RECORD";
+  content: "ROW / DEAL RECORD";
   display: block;
   margin-bottom: 0.5rem;
   color: var(--db-muted);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
+}
+
+.game-card .small.text-secondary {
+  color: var(--db-teal) !important;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.game-card .card-title {
+  overflow-wrap: anywhere;
 }
 
 .game-card .card-title {
