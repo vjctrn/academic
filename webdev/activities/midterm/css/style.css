@@ -39,7 +39,12 @@ main {
 }
 
 header {
-  background: linear-gradient(135deg, #211a38 0%, #44286b 58%, #6f42c1 100%) !important;
+  background: linear-gradient(
+    135deg,
+    #211a38 0%,
+    #44286b 58%,
+    #6f42c1 100%
+  ) !important;
   border-bottom: 5px solid var(--retro-pink);
 }
 
@@ -96,7 +101,9 @@ header p {
 .game-card {
   height: 100%;
   overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .game-card:hover {
@@ -153,11 +160,4 @@ header p {
 .pagination .page-item.disabled .page-link {
   color: #9c91a9;
   border-color: #c5b9c9;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .game-card,
-  .btn-warning {
-    transition: none;
-  }
 }
