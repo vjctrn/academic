@@ -1,22 +1,163 @@
+:root {
+  --retro-ink: #211a38;
+  --retro-purple: #6f42c1;
+  --retro-pink: #f04e98;
+  --retro-yellow: #ffd166;
+  --retro-cyan: #3ddbd9;
+  --retro-paper: #fff8e7;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--retro-ink);
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f6e8c8 !important;
+  background-image:
+    linear-gradient(rgba(111, 66, 193, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111, 66, 193, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+main {
+  min-height: calc(100vh - 230px);
+}
+
+/* Keep attribution readable and consistent with the retro header. */
+.site-footer {
+  color: var(--retro-paper);
+  background: var(--retro-ink);
+  border-top: 5px solid var(--retro-pink);
+}
+
+.site-footer a {
+  color: var(--retro-yellow);
+  font-weight: 700;
+}
+
+.site-footer a:hover {
+  color: var(--retro-cyan);
+}
+
+header {
+  background: linear-gradient(135deg, #211a38 0%, #44286b 58%, #6f42c1 100%) !important;
+  border-bottom: 5px solid var(--retro-pink);
+}
+
+header h1 {
+  color: var(--retro-yellow);
+  text-shadow: 3px 3px 0 #f04e98;
+  letter-spacing: 0.04em;
+}
+
+header p {
+  letter-spacing: 0.08em;
+}
+
+.card {
+  background-color: var(--retro-paper);
+  border: 2px solid rgba(33, 26, 56, 0.15) !important;
+  border-radius: 0.25rem !important;
+}
+
+.shadow-sm {
+  box-shadow: 5px 5px 0 rgba(33, 26, 56, 0.18) !important;
+}
+
+.btn-warning {
+  color: var(--retro-ink);
+  background-color: var(--retro-yellow);
+  border-color: var(--retro-ink);
+  box-shadow: 3px 3px 0 var(--retro-ink);
+  font-weight: 700;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  color: var(--retro-ink);
+  background-color: var(--retro-cyan);
+  border-color: var(--retro-ink);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--retro-ink);
+}
+
+.form-control,
+.form-select {
+  border: 2px solid var(--retro-ink);
+  border-radius: 0.2rem;
+  background-color: #fffdf5;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--retro-pink);
+  box-shadow: 0 0 0 0.2rem rgba(240, 78, 152, 0.2);
+}
+
 .game-card {
   height: 100%;
+  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .game-card:hover {
-  transform: translateY(-2px);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 rgba(33, 26, 56, 0.25) !important;
+}
+
+.game-card .card-title {
+  color: var(--retro-purple);
+  font-weight: 700;
+}
+
+.game-card .btn-outline-dark {
+  border-width: 2px;
+  color: var(--retro-purple);
+  border-color: var(--retro-purple);
+  font-weight: 700;
+}
+
+.game-card .btn-outline-dark:hover {
+  color: var(--retro-paper);
+  background-color: var(--retro-purple);
 }
 
 .game-art {
   height: 180px;
   object-fit: cover;
-  background: linear-gradient(135deg, #212529, #495057);
+  background: linear-gradient(135deg, var(--retro-ink), var(--retro-purple));
+  image-rendering: auto;
 }
 
 .game-art-placeholder {
   height: 180px;
   display: grid;
   place-items: center;
-  color: #adb5bd;
-  background: linear-gradient(135deg, #212529, #495057);
+  color: var(--retro-yellow);
+  background: linear-gradient(135deg, var(--retro-ink), var(--retro-purple));
+  font-weight: 700;
+}
+
+.pagination .page-link {
+  color: var(--retro-purple);
+  border: 2px solid var(--retro-purple);
+  background-color: var(--retro-paper);
+  margin: 0 2px;
+}
+
+.pagination .page-item.active .page-link {
+  color: var(--retro-ink);
+  background-color: var(--retro-yellow);
+  border-color: var(--retro-ink);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #9c91a9;
+  border-color: #c5b9c9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-card,
+  .btn-warning {
+    transition: none;
+  }
 }
