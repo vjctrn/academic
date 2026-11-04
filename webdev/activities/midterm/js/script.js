@@ -3,6 +3,7 @@ const gamesEl = document.querySelector("#games");
 const paginationEl = document.querySelector("#pagination");
 const summaryEl = document.querySelector("#results-summary");
 const statusEl = document.querySelector("#status");
+const refreshButton = document.querySelector("#refresh-deals");
 const stores = new Map();
 const fetchLimit = 100;
 const usdToPhpRate = getUsdToPhpRate();
@@ -100,6 +101,8 @@ document.querySelector("#limit").addEventListener("change", (event) => {
   state.page = 1;
   loadDeals();
 });
+
+refreshButton.addEventListener("click", loadDeals);
 
 Promise.all([
   loadStores(document.querySelector("#store"), stores),
