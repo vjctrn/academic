@@ -1,17 +1,23 @@
 let usdToPhpRatePromise;
 
+const loadUsdRates = (url) =>
+  fetch(url).then((response) => {
+    if (!response.ok) throw new Error("Unable to load currency rates.");
+    return response.json();
+  });
+
 const getUsdToPhpRate = () => {
   if (!usdToPhpRatePromise) {
-    usdToPhpRatePromise = fetch(
-      "https://api.frankfurter.app/latest?from=USD&to=PHP",
+    usdToPhpRatePromise = loadUsdRates(
+      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json",
     )
-      .then((response) => {
-        if (!response.ok)
-          throw new Error("Unable to load the USD to PHP rate.");
-        return response.json();
-      })
+      .catch(() =>
+        loadUsdRates(
+          "https://latest.currency-api.pages.dev/v1/currencies/usd.json",
+        ),
+      )
       .then((data) => {
-        const rate = Number(data.rates?.PHP);
+        const rate = Number(data.usd?.php);
         if (!Number.isFinite(rate)) {
           throw new Error("The USD to PHP rate was unavailable.");
         }
