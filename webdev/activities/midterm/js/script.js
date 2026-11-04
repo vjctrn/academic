@@ -30,7 +30,11 @@ const renderDeals = (deals, rate) => {
         <div class="card-body">
           <p class="small text-secondary mb-1">${stores.get(deal.storeID) || "Online store"}</p>
           <h2 class="h5 card-title">${deal.title}</h2>
-          <p class="mb-3"><strong>${formatPhp(deal.salePrice, rate)}</strong> <del class="small text-secondary">${formatPhp(deal.normalPrice, rate)}</del></p>
+          <p class="mb-3">
+            <strong>${formatPhp(deal.salePrice, rate)}</strong>
+            <del class="small text-secondary">${formatPhp(deal.normalPrice, rate)}</del>
+            <small class="d-block text-secondary">($${deal.salePrice}) <del>($${deal.normalPrice})</del></small>
+          </p>
           <span class="badge text-bg-success align-self-start mb-3">${savings.toFixed(0)}% off</span>
           <a class="btn btn-outline-dark btn-sm" href="view.html?id=${encodeURIComponent(deal.gameID)}&page=${state.page}">View deals</a>
         </div>

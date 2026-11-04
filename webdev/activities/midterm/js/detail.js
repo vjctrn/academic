@@ -37,7 +37,7 @@ const loadGame = async () => {
             <h2 class="display-6 fw-bold">${game.info.title}</h2>
             <p class="lead">Compare the available prices for this game.</p>
             <div class="list-group">
-              ${game.deals.map((deal) => `<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID)}" target="_blank" rel="noopener noreferrer"><span>${storeNames.get(deal.storeID) || "Online store"}</span><strong>${formatPhp(deal.price, rate)} <small class="text-secondary fw-normal">($${deal.price})</small></strong></a>`).join("")}
+              ${game.deals.map((deal) => `<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID)}" target="_blank" rel="noopener noreferrer"><span class="flex-grow-1 text-center">${storeNames.get(deal.storeID) || "Online store"}</span><strong>${formatPhp(deal.price, rate)} <small class="text-secondary fw-normal">($${deal.price})</small></strong></a>`).join("")}
             </div>
           </div>
         </div>
