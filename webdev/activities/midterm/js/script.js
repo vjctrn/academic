@@ -22,12 +22,12 @@ const renderDeals = (deals, rate) => {
   gamesEl.replaceChildren();
   deals.forEach((deal) => {
     const column = document.createElement("div");
-    column.className = "col-12 col-sm-6 col-lg-4 col-xl-3";
+    column.className = "col-12 col-sm-6 col-lg-4 col-xl-3 d-flex";
     const savings = Number(deal.savings);
     column.innerHTML = `
-      <article class="card game-card border-0 shadow-sm overflow-hidden">
+      <article class="card game-card border-0 shadow-sm overflow-hidden h-100 w-100 d-flex flex-column">
         <img class="card-img-top game-art" src="${deal.thumb}" alt="" loading="lazy">
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <p class="small text-secondary mb-1">${stores.get(deal.storeID) || "Online store"}</p>
           <h2 class="h5 card-title">${deal.title}</h2>
           <p class="mb-3">
@@ -36,7 +36,7 @@ const renderDeals = (deals, rate) => {
             <small class="d-block text-secondary">($${deal.salePrice}) <del>($${deal.normalPrice})</del></small>
           </p>
           <span class="badge text-bg-success align-self-start mb-3">${savings.toFixed(0)}% off</span>
-          <a class="btn btn-outline-dark btn-sm" href="view.html?id=${encodeURIComponent(deal.gameID)}&page=${state.page}">View deals</a>
+          <a class="btn btn-outline-dark btn-sm mt-auto" href="view.html?id=${encodeURIComponent(deal.gameID)}&page=${state.page}">View deals</a>
         </div>
       </article>`;
     gamesEl.append(column);

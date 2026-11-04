@@ -32,12 +32,12 @@
 .game-art-placeholder {
   width: 100%;
   border-bottom: 1px solid var(--db-line);
-  background: #e9f1f7;
+  background: #e9f1f78e;
 }
 
 .game-art {
   display: block;
-  height: auto;
+  height: 450px;
   object-fit: contain;
 }
 
