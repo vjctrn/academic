@@ -1,0 +1,85 @@
+/* Base */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background: #f5f6f8;
+  color: #222;
+}
+main {
+  max-width: 1100px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+/* Top navigation */
+nav {
+  background: #800000;
+  padding: 0.6rem 1rem;
+}
+nav a {
+  color: #fff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+nav a.on {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Tables and forms */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+  margin: 0.5rem 0;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 0.35rem 0.6rem;
+  text-align: left;
+}
+th {
+  background: #eee;
+}
+form {
+  margin: 0.6rem 0;
+}
+label {
+  margin-right: 0.6rem;
+}
+input,
+select,
+button {
+  padding: 0.3rem;
+}
+
+/* Report tabs */
+.tabs {
+  margin: 0.5rem 0;
+}
+.tabs a {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: #ddd;
+  color: #222;
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+  margin-right: 2px;
+}
+.tabs a.on {
+  background: #800000;
+  color: #fff;
+}
+
+/* Flash messages */
+.ok {
+  background: #d8f3dc;
+  padding: 0.6rem;
+  border-radius: 4px;
+}
+.err {
+  background: #fde2e2;
+  padding: 0.6rem;
+  border-radius: 4px;
+}
